@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package add_coin;
+
+message Foo {
+  oneof widget {
+    int32 quux = 1;
+    string bar = 2;
+  }
+}

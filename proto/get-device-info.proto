@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package get_device_info;
+
+message CmdRequest {
+  bool dummy = 1;
+}
+
+message SupportedCoinItem {
+  string id = 1;
+  string version = 2;
+}
+
+message CmdResponse {
+  string deviceSerial = 1;
+  string firmwareVersion = 2;
+  bool isAuthenticated = 3;
+  repeated SupportedCoinItem coinList = 4;
+}
