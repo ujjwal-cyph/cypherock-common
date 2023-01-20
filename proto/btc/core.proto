@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+import "proto/common.proto";
+import "proto/btc/add-account.proto";
+import "proto/btc/generate-address.proto";
+import "proto/btc/sign-txn.proto";
+import "proto/btc/error.proto";
+
+package btc;
+
+message Request {
+  oneof request {
+    AddAccountRequest addAccount = 1;
+    GenerateAddressRequest generateAddress = 2;
+    SignTxnRequest signTxn = 3;
+  }
+}
+
+message Response {
+  oneof response {
+    ErrorResponse error = 1;
+    AddAccountResponse addAccount = 2;
+    GenerateAddressResponse generateAddress = 3;
+    SignTxnResponse signTxn = 4;
+  }
+}

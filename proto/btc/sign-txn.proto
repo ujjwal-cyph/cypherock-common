@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+import "proto/common.proto";
+
+package btc;
+
+/**
+ * Example where there are 2 inputs in the txn
+ *
+ *        Host                       Device
+ * SignTxnInitiateRequest  => 
+ *                         <= SignTxnConfirmationResponse
+ * SignTxnSignRequest      =>
+ *                         <= SignTxnUtxoRequest
+ * SignTxnUtxoResponse     =>
+ *                         <= SignTxnUtxoRequest
+ * SignTxnUtxoResponse     =>
+ *                         <= SignTxnUtxoRequest
+ * SignTxnSignatureRequest =>
+ *                         <= SignTxnSignatureResponse
+ * SignTxnSignatureRequest =>
+ *                         <= SignTxnSignatureResponse
+ */
+
+message SignTxnInputMeta {
+  string chainIndex = 1;
+  string addressIndex = 2;
+}
+
+message SignTxnChangeMeta {
+  string chainIndex = 1;
+  string addressIndex = 2;
+}
+
+message SignTxnInitiateRequest {
+  string walletId = 1;
+  string coinId = 2;
+
+  common.DerivationPath derivationPath = 3;
+  repeated SignTxnInputMeta inputs = 4;
+  repeated SignTxnChangeMeta change = 5;
+
+  uint32 fees = 6;
+}
+
+message SignTxnConfirmationResponse {
+  uint32 maxTxnSize = 1;
+}
+
+message SignTxnInput {
+  string txId = 1; 
+  uint32 vout = 2; 
+  uint64 value = 3; 
+  string scriptKey = 4; 
+  uint32 sequence = 5; 
+}
+
+message SignTxnOutput {
+  uint64 value = 1; 
+  string scriptKey = 2; 
+}
+
+message SignTxnSignRequest {
+  uint32 networkVersion = 1;
+  repeated SignTxnInput inputs = 2;
+  repeated SignTxnInput outputs = 3;
+  uint32 locktime = 4;
+  uint32 hashType = 5;
+}
+
+// Special case where request is sent from device
+message SignTxnUtxoRequest {
+  bool readyToReceive = 1;
+  bool validUtxo = 2;
+}
+
+// Special case where response is sent from host
+message SignTxnUtxoResponse {
+  string utxo = 1;
+}
+
+message SignTxnSignatureRequest {
+  bool dummy = 1;
+}
+
+message SignTxnSignatureResponse {
+  string signature = 1;
+}
+
+message SignTxnRequest {
+  oneof request {
+    SignTxnInitiateRequest initiate = 1;
+    SignTxnSignRequest sign = 2;
+    SignTxnUtxoResponse utxo = 3;
+    SignTxnSignatureRequest signature = 4;
+  }
+}
+
+message SignTxnResponse {
+  oneof response {
+    SignTxnConfirmationResponse confirmation = 1;
+    SignTxnUtxoRequest utxo = 2;
+    SignTxnSignatureResponse signature = 3;
+  }
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package btc;
+
+enum SigningError {
+  SIGNING_ERROR_INVALID_UTXO = 0;
+  SIGNING_ERROR = 1;
+}
+
+message ErrorResponse {
+  oneof response {
+    SigningError signError = 1;
+  }
+}

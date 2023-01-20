@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package error;
+
+/*
+ * When requesting for a specific wallet and it's not found
+ */
+enum WalletNotFound {
+  WALLET_NOT_FOUND_ON_DEVICE = 0;
+  WALLET_NOT_FOUND_ON_CARD = 1;
+}
+
+/*
+ * When requesting for a specific wallet and it's in partial
+ * state
+ */
+enum WalletPartialState {
+  WALLET_PARTIAL_STATE_LOCKED = 0;
+  WALLET_PARTIAL_STATE_DELETE = 1;
+  WALLET_PARTIAL_STATE_UNVERIFIED = 2;
+  WALLET_PARTIAL_STATE_OUT_OF_SYNC = 3;
+}
+
+/*
+ * When the operation requires wallet selection
+ * and no wallets exists or all wallets are in partial
+ * state
+ */
+enum NoWalletExists {
+  NO_WALLET_EXISTS_VALID_STATE = 0;
+  NO_WALLET_EXISTS_PARTIAL_STATE = 1;
+}
+
+enum CardError {
+  CARD_ERROR_UNKNOWN = 0;
+  CARD_ERROR_NOT_PAIRED = 1;
+  // Crypto operation failed or unusable card
+  CARD_ERROR_OPERATION_FAILED = 2;
+}
+
+/*
+ * When user rejects the operation
+ */
+enum UserRejection {
+  USER_REJECTION_UNKNOWN = 0;
+  USER_REJECTION_CONFIRMATION = 1;
+  USER_REJECTION_ADDRESS = 2;
+  USER_REJECTION_VALUE = 3;
+  USER_REJECTION_FEES = 4;
+  USER_REJECTION_METADATA = 5;
+}
+
+message CoreError {
+  // For future error codes
+  reserved 4 to 10;
+  reserved 14 to 20;
+
+  oneof error {
+    // ****** Protocol specific errors ******
+    uint32 unknownError = 1;
+    uint32 unsupportedQuery = 2;
+    uint32 invalidQuery = 3;
+
+    // ****** Wallet specific errors ******
+
+    // The specified wallet does not exist
+    WalletNotFound walletNotFound = 11;
+
+    // The specified wallet is in partial state
+    WalletPartialState walletPartialState = 12;
+
+    // No wallet exist on device
+    NoWalletExists noWalletExists = 13;
+    
+    // Card Error
+    CardError cardError = 21;
+
+    // User rejection error
+    UserRejection userRejection = 22;
+  }
+}
+
+message CoinError {
+  oneof error {
+    bool walletNotFound = 1;
+    bool walletNotFoundOnCard = 2;
+  }
+}
+
+message Response {
+  oneof response {
+    CoreError coreError = 1;
+    CoinError coinError = 2;
+  }
+}

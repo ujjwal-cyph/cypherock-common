@@ -1,17 +1,19 @@
 syntax = "proto3";
 
+import "proto/common.proto";
+
 package get_device_info;
 
-message CmdRequest {
+message Request {
   bool dummy = 1;
 }
 
 message SupportedCoinItem {
   string id = 1;
-  string version = 2;
+  common.Version version = 2;
 }
 
-message CmdResponse {
+message Response {
   string deviceSerial = 1;
   string firmwareVersion = 2;
   bool isAuthenticated = 3;

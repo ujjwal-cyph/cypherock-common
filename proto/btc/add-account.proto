@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+import "proto/common.proto";
+
+package btc;
+
+message AddAccountRequest {
+  string walletId = 1;
+  string coinId = 2;
+  /*
+   * BTC: m/44'/0'/0'
+   * ETH: m/44'/0'/0'/0/0
+   */
+
+  common.DerivationPath derivationPath = 3;
+}
+
+message AddAccountResponse {
+  string xpub = 1;
+}
