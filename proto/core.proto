@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "proto/get-device-info.proto";
+import "proto/get_device_info.proto";
 import "proto/error.proto";
 import "proto/btc/core.proto";
 

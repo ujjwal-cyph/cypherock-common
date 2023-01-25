@@ -9,13 +9,13 @@ message Request {
 }
 
 message SupportedCoinItem {
-  string id = 1;
+  bytes id = 1;
   common.Version version = 2;
 }
 
 message Response {
-  string deviceSerial = 1;
-  string firmwareVersion = 2;
+  bytes deviceSerial = 1;
+  common.Version firmwareVersion = 2;
   bool isAuthenticated = 3;
   repeated SupportedCoinItem coinList = 4;
 }

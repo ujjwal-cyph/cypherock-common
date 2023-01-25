@@ -1,9 +1,8 @@
 syntax = "proto3";
 
-import "proto/common.proto";
-import "proto/btc/add-account.proto";
-import "proto/btc/generate-address.proto";
-import "proto/btc/sign-txn.proto";
+import "proto/btc/add_account.proto";
+import "proto/btc/generate_address.proto";
+import "proto/btc/sign_txn.proto";
 import "proto/btc/error.proto";
 
 package btc;

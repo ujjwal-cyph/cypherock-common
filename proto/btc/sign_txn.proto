@@ -23,18 +23,18 @@ package btc;
  */
 
 message SignTxnInputMeta {
-  string chainIndex = 1;
-  string addressIndex = 2;
+  uint32 chainIndex = 1;
+  uint32 addressIndex = 2;
 }
 
 message SignTxnChangeMeta {
-  string chainIndex = 1;
-  string addressIndex = 2;
+  uint32 chainIndex = 1;
+  uint32 addressIndex = 2;
 }
 
 message SignTxnInitiateRequest {
-  string walletId = 1;
-  string coinId = 2;
+  bytes walletId = 1;
+  bytes coinId = 2;
 
   common.DerivationPath derivationPath = 3;
   repeated SignTxnInputMeta inputs = 4;
@@ -48,16 +48,16 @@ message SignTxnConfirmationResponse {
 }
 
 message SignTxnInput {
-  string txId = 1; 
+  bytes txId = 1; 
   uint32 vout = 2; 
   uint64 value = 3; 
-  string scriptKey = 4; 
+  bytes scriptKey = 4; 
   uint32 sequence = 5; 
 }
 
 message SignTxnOutput {
   uint64 value = 1; 
-  string scriptKey = 2; 
+  bytes scriptKey = 2; 
 }
 
 message SignTxnSignRequest {
@@ -76,7 +76,7 @@ message SignTxnUtxoRequest {
 
 // Special case where response is sent from host
 message SignTxnUtxoResponse {
-  string utxo = 1;
+  bytes utxo = 1;
 }
 
 message SignTxnSignatureRequest {

@@ -5,8 +5,8 @@ import "proto/common.proto";
 package btc;
 
 message GenerateAddressRequest {
-  string walletId = 1;
-  string coinId = 2;
+  bytes walletId = 1;
+  bytes coinId = 2;
 
   common.DerivationPath derivationPath = 3;
 }

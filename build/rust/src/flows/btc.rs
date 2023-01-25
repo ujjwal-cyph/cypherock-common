@@ -1,3 +1,4 @@
+use hex;
 use crate::proto;
 use crate::utils::*;
 
@@ -8,8 +9,8 @@ pub fn create_query() -> proto::core::Query {
     let mut derivation_path = proto::common::DerivationPath::default();
     derivation_path.path = vec![44, 0, 0, 0, 0];
 
-    add_account_query.wallet_id = String::from("DEMO");
-    add_account_query.coin_id = String::from("btc");
+    add_account_query.wallet_id = hex::decode("f51f").unwrap();
+    add_account_query.coin_id = hex::decode("ff7658123f").unwrap();
     add_account_query.derivation_path = Some(derivation_path);
     btc_query.request = Some(proto::btc::request::Request::AddAccount(add_account_query));
     query.request = Some(proto::core::query::Request::Btc(btc_query));
@@ -17,19 +18,19 @@ pub fn create_query() -> proto::core::Query {
     query
 }
 
-pub fn parse_query(query: &proto::core::Query) {
+pub fn parse_query(query: proto::core::Query) {
     println!("Parsing query...");
-    match &query.request {
+    match query.request {
         None => println!("None cmd"),
         Some(proto::core::query::Request::Btc(cmd)) => {
             println!("Is Btc Query");
 
-            match &cmd.request {
+            match cmd.request {
                 None => println!("None cmd"),
                 Some(proto::btc::request::Request::AddAccount(cmd)) => {
                     println!("Is Btc Add Account Query");
-                    println!("Wallet Id: {}", cmd.wallet_id);
-                    println!("Coin Id: {}", cmd.coin_id);
+                    println!("Wallet Id: {:?}", hex::encode(cmd.wallet_id));
+                    println!("Coin Id: {:?}", hex::encode(cmd.coin_id));
 
                     match &cmd.derivation_path {
                         None => println!("No derivation path"),
@@ -90,7 +91,7 @@ pub fn run() {
     let serialized = serialize(&query);
     let deserialized = deserialize_query(&serialized).expect("Error");
     println!("Serialized Query: {:?}", serialized);
-    parse_query(&deserialized);
+    parse_query(deserialized);
 
     println!();
 
