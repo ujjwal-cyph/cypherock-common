@@ -1,8 +1,6 @@
 syntax = "proto3";
 
-import "proto/get_device_info.proto";
-import "proto/error.proto";
-import "proto/btc/core.proto";
+import "error.proto";
 
 package core;
 
@@ -40,17 +38,19 @@ message Status {
   uint32 flowStatus = 6;
 }
 
+message Command {
+  uint32 applet_id = 1;
+  bytes data = 2;
+}
+
 message Query {
   oneof request {
-    get_device_info.Request getDeviceInfo = 1;
-    btc.Request btc = 2;
+    Command cmd = 1;
   }
 }
 
 message Result {
   oneof response {
     error.Response error = 1;
-    get_device_info.Response getDeviceInfo = 2;
-    btc.Response btc = 3;
   }
 }
