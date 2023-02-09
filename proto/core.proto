@@ -29,13 +29,13 @@ enum CmdState {
 }
 
 message Status {
-  DeviceWaitingOn deviceWaitingOn = 1;
-  DeviceIdleState deviceIdleState = 2;
-  bool abortDisabled = 3;
-  uint32 currentCmdSeq = 4;
-  CmdState cmdState = 5;
+  DeviceWaitingOn device_waiting_on = 1;
+  DeviceIdleState device_idle_state = 2;
+  bool abort_disabled = 3;
+  uint32 current_cmd_seq = 4;
+  CmdState cmd_state = 5;
   // Can be an enum
-  uint32 flowStatus = 6;
+  uint32 flow_status = 6;
 }
 
 message Command {
