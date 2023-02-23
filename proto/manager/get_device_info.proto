@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "common.proto";
+
+package manager;
+
+message SupportedAppletItem {
+  bytes id = 1;
+  common.Version version = 2;
+}
+
+message GetDeviceInfoRequest {
+  bool dummy = 1;
+}
+
+message GetDeviceInfoResponse {
+  bytes device_serial = 1;
+  common.Version firmware_version = 2;
+  bool is_authenticated = 3;
+  repeated SupportedAppletItem applet_list = 4;
+}

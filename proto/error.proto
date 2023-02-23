@@ -57,39 +57,39 @@ message CoreError {
 
   oneof error {
     // ****** Protocol specific errors ******
-    uint32 unknownError = 1;
-    uint32 unsupportedQuery = 2;
-    uint32 invalidQuery = 3;
+    uint32 unknown_error = 1;
+    uint32 unsupported_query = 2;
+    uint32 invalid_query = 3;
 
     // ****** Wallet specific errors ******
 
     // The specified wallet does not exist
-    WalletNotFound walletNotFound = 11;
+    WalletNotFound wallet_not_found = 11;
 
     // The specified wallet is in partial state
-    WalletPartialState walletPartialState = 12;
+    WalletPartialState wallet_partial_state = 12;
 
     // No wallet exist on device
-    NoWalletExists noWalletExists = 13;
+    NoWalletExists no_wallet_exists = 13;
     
     // Card Error
-    CardError cardError = 21;
+    CardError card_error = 21;
 
     // User rejection error
-    UserRejection userRejection = 22;
+    UserRejection user_rejection = 22;
   }
 }
 
 message CoinError {
   oneof error {
-    bool walletNotFound = 1;
-    bool walletNotFoundOnCard = 2;
+    bool wallet_not_found = 1;
+    bool wallet_not_found_on_card = 2;
   }
 }
 
 message Response {
   oneof response {
-    CoreError coreError = 1;
-    CoinError coinError = 2;
+    CoreError core_error = 1;
+    CoinError coin_error = 2;
   }
 }

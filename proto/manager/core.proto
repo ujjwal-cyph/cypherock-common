@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "manager/get_device_info.proto";
+
+package manager;
+
+message Query {
+  oneof request {
+    GetDeviceInfoRequest get_device_info = 1;
+  }
+}
+
+message Result {
+  oneof response {
+    GetDeviceInfoResponse get_device_info = 1;
+  }
+}

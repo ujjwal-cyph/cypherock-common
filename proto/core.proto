@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "error.proto";
-
 package core;
 
 enum DeviceWaitingOn {
@@ -51,6 +49,6 @@ message Query {
 
 message Result {
   oneof response {
-    error.Response error = 1;
+    Command cmd = 1;
   }
 }
