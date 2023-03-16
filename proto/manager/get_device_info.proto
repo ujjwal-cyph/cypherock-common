@@ -5,7 +5,7 @@ import "common.proto";
 package manager;
 
 message SupportedAppletItem {
-  bytes id = 1;
+  uint32 id = 1;
   common.Version version = 2;
 }
 
