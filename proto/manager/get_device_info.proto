@@ -10,7 +10,6 @@ message SupportedAppletItem {
 }
 
 message GetDeviceInfoRequest {
-  bool dummy = 1;
 }
 
 message GetDeviceInfoResponse {

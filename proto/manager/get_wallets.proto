@@ -10,7 +10,6 @@ message WalletItem {
 }
 
 message GetWalletsRequest {
-  bool dummy = 1;
 }
 
 message GetWalletsResponse {
