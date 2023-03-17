@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package manager;
+
+/**
+ * Example of successful authentication
+ *
+ *        Host                       Device
+ * AuthDeviceInitiateRequest  => 
+ *                            <= AuthDeviceSerialSigResponse
+ * AuthDeviceChallengeRequest =>
+ *                            <= AuthDeviceChallengeSigResponse
+ * AuthDeviceResult           =>
+ */
+
+/**
+ * Example of failed authentication
+ *
+ *        Host                       Device
+ * AuthDeviceInitiateRequest  => 
+ *                            <= AuthDeviceSerialSigResponse
+ * AuthDeviceResult           =>
+ */
+
+message AuthDeviceInitiateRequest {
+}
+
+message AuthDeviceChallengeRequest {
+  bytes challenge = 1;
+}
+
+message AuthDeviceResult {
+  bool verified = 1;
+}
+
+message AuthDeviceSerialSigResponse {
+  bytes postfix1 = 1;
+  bytes postfix2 = 2;
+
+  bytes serial = 3;
+  bytes signature = 4;
+}
+
+message AuthDeviceChallengeSigResponse {
+  bytes postfix1 = 1;
+  bytes postfix2 = 2;
+
+  bytes signature = 3;
+}
+
+message AuthDeviceRequest {
+  oneof request {
+    AuthDeviceInitiateRequest initiate = 1;
+    AuthDeviceChallengeRequest challenge = 2;
+    AuthDeviceResult result = 3;
+  }
+}
+
+message AuthDeviceResponse {
+  oneof response {
+    AuthDeviceSerialSigResponse serial_signature = 1;
+    AuthDeviceChallengeSigResponse challenge_signature = 2;
+  }
+}
