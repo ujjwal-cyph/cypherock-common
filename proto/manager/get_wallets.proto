@@ -13,5 +13,5 @@ message GetWalletsRequest {
 }
 
 message GetWalletsResponse {
-  repeated WalletItem wallet_list = 4;
+  repeated WalletItem wallet_list = 1;
 }
