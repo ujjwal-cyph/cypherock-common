@@ -1,17 +1,20 @@
 syntax = "proto3";
 
 import "manager/get_device_info.proto";
+import "manager/get_wallets.proto";
 
 package manager;
 
 message Query {
   oneof request {
     GetDeviceInfoRequest get_device_info = 1;
+    GetWalletsRequest get_wallets = 2;
   }
 }
 
 message Result {
   oneof response {
     GetDeviceInfoResponse get_device_info = 1;
+    GetWalletsResponse get_wallets = 2;
   }
 }
