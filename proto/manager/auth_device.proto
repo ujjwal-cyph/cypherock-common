@@ -22,6 +22,11 @@ package manager;
  * AuthDeviceResult           =>
  */
 
+enum AuthDeviceStatus {
+  AUTH_DEVICE_STATUS_INIT = 0;
+  AUTH_DEVICE_STATUS_USER_CONFIRMED = 1;
+}
+
 message AuthDeviceInitiateRequest {
 }
 
