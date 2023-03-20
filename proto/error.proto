@@ -58,8 +58,6 @@ message CoreError {
   oneof error {
     // ****** Protocol specific errors ******
     uint32 unknown_error = 1;
-    uint32 unsupported_query = 2;
-    uint32 invalid_query = 3;
 
     // ****** Wallet specific errors ******
 
@@ -77,19 +75,5 @@ message CoreError {
 
     // User rejection error
     UserRejection user_rejection = 22;
-  }
-}
-
-message CoinError {
-  oneof error {
-    bool wallet_not_found = 1;
-    bool wallet_not_found_on_card = 2;
-  }
-}
-
-message Response {
-  oneof response {
-    CoreError core_error = 1;
-    CoinError coin_error = 2;
   }
 }

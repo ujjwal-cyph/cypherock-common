@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "error.proto";
+
 package manager;
 
 /**
@@ -65,5 +67,7 @@ message AuthDeviceResponse {
   oneof response {
     AuthDeviceSerialSigResponse serial_signature = 1;
     AuthDeviceChallengeSigResponse challenge_signature = 2;
+
+    error.CoreError core_error = 3;
   }
 }
