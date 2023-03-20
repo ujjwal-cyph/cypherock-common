@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+import "error.proto";
+
+package manager;
+
+/**
+ * Example of successful authentication
+ *
+ *        Host                       Card
+ * AuthCardInitiateRequest  => 
+ *                            <= AuthCardSerialSigResponse
+ * AuthCardChallengeRequest =>
+ *                            <= AuthCardChallengeSigResponse
+ * AuthCardResult           =>
+ */
+
+/**
+ * Example of failed authentication
+ *
+ *        Host                       Card
+ * AuthCardInitiateRequest  => 
+ *                            <= AuthCardSerialSigResponse
+ * AuthCardResult           =>
+ */
+
+enum AuthCardStatus {
+  AUTH_CARD_STATUS_INIT = 0;
+  AUTH_CARD_STATUS_USER_CONFIRMED = 1;
+}
+
+message AuthCardInitiateRequest {
+}
+
+message AuthCardChallengeRequest {
+  bytes challenge = 1;
+}
+
+message AuthCardResult {
+  bool verified = 1;
+}
+
+message AuthCardSerialSigResponse {
+  bytes serial = 1;
+  bytes signature = 2;
+}
+
+message AuthCardChallengeSigResponse {
+  bytes signature = 1;
+}
+
+message AuthCardRequest {
+  oneof request {
+    AuthCardInitiateRequest initiate = 1;
+    AuthCardChallengeRequest challenge = 2;
+    AuthCardResult result = 3;
+  }
+}
+
+message AuthCardResponse {
+  oneof response {
+    AuthCardSerialSigResponse serial_signature = 1;
+    AuthCardChallengeSigResponse challenge_signature = 2;
+
+    error.CoreError core_error = 3;
+  }
+}

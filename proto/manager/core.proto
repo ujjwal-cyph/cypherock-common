@@ -3,6 +3,7 @@ syntax = "proto3";
 import "manager/get_device_info.proto";
 import "manager/get_wallets.proto";
 import "manager/auth_device.proto";
+import "manager/auth_card.proto";
 
 package manager;
 
@@ -11,6 +12,7 @@ message Query {
     GetDeviceInfoRequest get_device_info = 1;
     GetWalletsRequest get_wallets = 2;
     AuthDeviceRequest auth_device = 3;
+    AuthCardRequest auth_card = 4;
   }
 }
 
@@ -19,5 +21,6 @@ message Result {
     GetDeviceInfoResponse get_device_info = 1;
     GetWalletsResponse get_wallets = 2;
     AuthDeviceResponse auth_device = 3;
+    AuthCardResponse auth_card = 4;
   }
 }
