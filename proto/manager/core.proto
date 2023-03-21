@@ -4,6 +4,7 @@ import "manager/get_device_info.proto";
 import "manager/get_wallets.proto";
 import "manager/auth_device.proto";
 import "manager/auth_card.proto";
+import "manager/get_logs.proto";
 
 package manager;
 
@@ -13,6 +14,7 @@ message Query {
     GetWalletsRequest get_wallets = 2;
     AuthDeviceRequest auth_device = 3;
     AuthCardRequest auth_card = 4;
+    GetLogsRequest get_logs = 5;
   }
 }
 
@@ -22,5 +24,6 @@ message Result {
     GetWalletsResponse get_wallets = 2;
     AuthDeviceResponse auth_device = 3;
     AuthCardResponse auth_card = 4;
+    GetLogsResponse get_logs = 5;
   }
 }

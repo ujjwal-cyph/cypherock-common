@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+import "error.proto";
+
+package manager;
+
+/**
+ * Example of successful authentication
+ *
+ *        Host                       Card
+ * GetLogsInitiateRequest  => 
+ *                            <= GetLogsDataResponse (hasMore: true)
+ * GetLogsFetchNextRequest =>
+ *                            <= GetLogsDataResponse (hasMore: true)
+ * GetLogsFetchNextRequest =>
+ *                            <= GetLogsDataResponse (hasMore: true)
+ * GetLogsFetchNextRequest =>
+ *                            <= GetLogsDataResponse (hasMore: false)
+ */
+
+enum GetLogsStatus {
+  GET_LOGS_STATUS_INIT = 0;
+  GET_LOGS_STATUS_USER_CONFIRMED = 1;
+}
+
+message GetLogsInitiateRequest {
+}
+
+message GetLogsFetchNextRequest {
+}
+
+message GetLogsDataResponse {
+  bytes data = 1;
+  bool has_more = 2;
+}
+
+message GetLogsErrorResponse {
+  bool logs_disabled = 1;
+}
+
+message GetLogsRequest {
+  oneof request {
+    GetLogsInitiateRequest initiate = 1;
+    GetLogsFetchNextRequest fetch_next = 2;
+  }
+}
+
+message GetLogsResponse {
+  oneof response {
+    GetLogsDataResponse logs = 1;
+
+    error.CoreError core_error = 2;
+    GetLogsErrorResponse error = 3;
+  }
+}
