@@ -30,6 +30,7 @@ enum AuthCardStatus {
 }
 
 message AuthCardInitiateRequest {
+  optional uint32 card_index = 1;
 }
 
 message AuthCardChallengeRequest {

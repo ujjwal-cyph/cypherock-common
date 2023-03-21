@@ -5,6 +5,7 @@ import "manager/get_wallets.proto";
 import "manager/auth_device.proto";
 import "manager/auth_card.proto";
 import "manager/get_logs.proto";
+import "manager/train_user.proto";
 
 package manager;
 
@@ -15,6 +16,7 @@ message Query {
     AuthDeviceRequest auth_device = 3;
     AuthCardRequest auth_card = 4;
     GetLogsRequest get_logs = 5;
+    TrainUserRequest train_user = 6;
   }
 }
 
@@ -25,5 +27,6 @@ message Result {
     AuthDeviceResponse auth_device = 3;
     AuthCardResponse auth_card = 4;
     GetLogsResponse get_logs = 5;
+    TrainUserResponse train_user = 6;
   }
 }

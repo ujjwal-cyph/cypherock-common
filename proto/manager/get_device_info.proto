@@ -9,6 +9,17 @@ message SupportedAppletItem {
   common.Version version = 2;
 }
 
+message InitialStateItem {
+  bool is_completed = 1;
+  optional uint32 state = 2;
+}
+
+message InitialStates {
+  InitialStateItem auth_device = 1;
+  InitialStateItem user_training = 2;
+  InitialStateItem auth_cards = 3;
+}
+
 message GetDeviceInfoRequest {
 }
 
@@ -17,4 +28,7 @@ message GetDeviceInfoResponse {
   common.Version firmware_version = 2;
   bool is_authenticated = 3;
   repeated SupportedAppletItem applet_list = 4;
+
+  bool is_initial = 5;
+  InitialStates initial_states = 6;
 }
