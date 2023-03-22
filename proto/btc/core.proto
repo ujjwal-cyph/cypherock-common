@@ -1,25 +1,17 @@
 syntax = "proto3";
 
-import "proto/btc/add_account.proto";
-import "proto/btc/generate_address.proto";
-import "proto/btc/sign_txn.proto";
-import "proto/btc/error.proto";
+import "btc/get_public_key.proto";
 
 package btc;
 
-message Request {
+message Query {
   oneof request {
-    AddAccountRequest addAccount = 1;
-    GenerateAddressRequest generateAddress = 2;
-    SignTxnRequest signTxn = 3;
+    GetPublicKeyRequest get_public_key = 1;
   }
 }
 
-message Response {
+message Result {
   oneof response {
-    ErrorResponse error = 1;
-    AddAccountResponse addAccount = 2;
-    GenerateAddressResponse generateAddress = 3;
-    SignTxnResponse signTxn = 4;
+    GetPublicKeyResponse get_public_key = 1;
   }
 }
