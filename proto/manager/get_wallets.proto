@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package manager;
 
+import "error.proto";
+
 message WalletItem {
   bytes id = 1;
   string name = 2;
@@ -9,9 +11,23 @@ message WalletItem {
   bool hasPassphrase = 4;
 }
 
+message GetWalletsIntiateRequest {
+}
+
+message GetWalletsResultResponse {
+  repeated WalletItem wallet_list = 1;
+}
+
 message GetWalletsRequest {
+  oneof request {
+    GetWalletsIntiateRequest initiate = 1;
+  }
 }
 
 message GetWalletsResponse {
-  repeated WalletItem wallet_list = 1;
+  oneof response {
+    GetWalletsResultResponse result = 1;
+
+    error.CoreError core_error = 2;
+  }
 }

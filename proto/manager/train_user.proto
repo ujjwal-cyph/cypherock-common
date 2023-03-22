@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "error.proto";
+
 package manager;
 
 message ExistingWalletItem {
@@ -17,10 +19,25 @@ enum TrainUserStatus {
   USER_TRAINING_CARD_TAP = 6;
 }
 
+message TrainUserInitiateRequest {
+  optional TrainUserStatus jump_to_state = 1;
+}
+
 message TrainUserRequest {
+  oneof request {
+    TrainUserInitiateRequest initiate = 1;
+  }
+}
+
+message TrainUserResultResponse {
+  bool is_success = 1;
+  repeated ExistingWalletItem existing_wallet_list = 2;
 }
 
 message TrainUserResponse {
-  bool is_success = 1;
-  repeated ExistingWalletItem existing_wallet_list = 2;
+  oneof response {
+    TrainUserResultResponse result = 1;
+
+    error.CoreError core_error = 2;
+  }
 }

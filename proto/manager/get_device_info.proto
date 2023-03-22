@@ -2,6 +2,8 @@ syntax = "proto3";
 
 import "common.proto";
 
+import "error.proto";
+
 package manager;
 
 message SupportedAppletItem {
@@ -20,10 +22,10 @@ message InitialStates {
   InitialStateItem auth_cards = 3;
 }
 
-message GetDeviceInfoRequest {
+message GetDeviceInfoIntiateRequest {
 }
 
-message GetDeviceInfoResponse {
+message GetDeviceInfoResultResponse {
   bytes device_serial = 1;
   common.Version firmware_version = 2;
   bool is_authenticated = 3;
@@ -31,4 +33,18 @@ message GetDeviceInfoResponse {
 
   bool is_initial = 5;
   InitialStates initial_states = 6;
+}
+
+message GetDeviceInfoRequest {
+  oneof request {
+    GetDeviceInfoIntiateRequest initiate = 1;
+  }
+}
+
+message GetDeviceInfoResponse {
+  oneof response {
+    GetDeviceInfoResultResponse result = 1;
+
+    error.CoreError core_error = 2;
+  }
 }

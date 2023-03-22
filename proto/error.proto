@@ -52,12 +52,19 @@ enum UserRejection {
 
 message CoreError {
   // For future error codes
-  reserved 4 to 10;
+  reserved 5 to 10;
   reserved 14 to 20;
 
   oneof error {
     // ****** Protocol specific errors ******
     uint32 unknown_error = 1;
+
+    uint32 invalid_app_id = 2;
+
+    uint32 invalid_result = 3;
+
+    // The user needs to complete device setup
+    uint32 device_setup_required = 4;
 
     // ****** Wallet specific errors ******
 
