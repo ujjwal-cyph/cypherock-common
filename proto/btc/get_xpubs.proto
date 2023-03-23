@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+import "common.proto";
+import "error.proto";
+
+package btc;
+
+enum GetXpubsStatus {
+  GET_XPUBS_STATUS_INIT = 0;
+  GET_XPUBS_STATUS_CONFIRM = 1;
+  GET_XPUBS_STATUS_PASSPHRASE = 2;
+  GET_XPUBS_STATUS_PIN = 3;
+  GET_XPUBS_STATUS_CARD = 4;
+}
+
+message GetXpubDerivationPath {
+  repeated common.DerivationPath path = 1;
+}
+
+message GetXpubsIntiateRequest {
+  bytes wallet_id = 1;
+
+  /*
+   * xpub: m/44'/0'/0'
+   */
+  repeated GetXpubDerivationPath derivation_paths = 2;
+}
+
+message GetXpubsResultResponse {
+  repeated string xpubs = 1;
+}
+
+message GetXpubsRequest {
+  oneof request {
+    GetXpubsIntiateRequest initiate = 1;
+  }
+}
+
+message GetXpubsResponse {
+  oneof response {
+    GetXpubsResultResponse result = 1;
+
+    error.CoreError core_error = 2;
+  }
+}

@@ -1,17 +1,20 @@
 syntax = "proto3";
 
 import "btc/get_public_key.proto";
+import "btc/get_xpubs.proto";
 
 package btc;
 
 message Query {
   oneof request {
     GetPublicKeyRequest get_public_key = 1;
+    GetXpubsRequest get_xpubs = 2;
   }
 }
 
 message Result {
   oneof response {
     GetPublicKeyResponse get_public_key = 1;
+    GetXpubsResponse get_xpubs = 2;
   }
 }

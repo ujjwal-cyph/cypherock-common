@@ -11,16 +11,16 @@ enum GetPublicKeyStatus {
   GET_PUBLIC_KEY_STATUS_PASSPHRASE = 2;
   GET_PUBLIC_KEY_STATUS_PIN = 3;
   GET_PUBLIC_KEY_STATUS_CARD = 4;
+  GET_PUBLIC_KEY_STATUS_VERIFY = 5;
 }
 
 message GetPublicKeyIntiateRequest {
-  bytes walletId = 1;
+  bytes wallet_id = 1;
 
   /*
-   * xpub: m/44'/0'/0'
    * address: m/44'/0'/0'/0/0
    */
-  repeated common.DerivationPath derivationPath = 2;
+  repeated common.DerivationPath derivation_path = 2;
 }
 
 message GetPublicKeyResultResponse {
