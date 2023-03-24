@@ -1,0 +1,131 @@
+syntax = "proto3";
+
+import "common.proto";
+
+import "error.proto";
+
+package btc;
+
+/**
+ * Example where there are 3 inputs and 2 outputs in the txn
+ *
+ *        Host                       Device
+ *
+ * SignTxnInitiateRequest  => 
+ *                         <= SignTxnConfirmationResponse
+ * SignTxnMetaResponse     =>
+ *
+ *
+ *                         <= SignTxnInputRequest
+ * SignTxnInputResponse    =>
+ *                         <= SignTxnInputRequest
+ * SignTxnInputResponse    =>
+ *                         <= SignTxnInputRequest
+ * SignTxnInputResponse    =>
+ *
+ *
+ *                         <= SignTxnOutputRequest
+ * SignTxnOutputResponse   =>
+ *                         <= SignTxnOutputRequest
+ * SignTxnOutputResponse   =>
+ *
+ *
+ * **** Device has all transaction information ****
+ *
+ *
+ *                         <= SignTxnVerifiedResponse
+ * SignTxnSignatureRequest =>
+ *                         <= SignTxnSignatureResponse
+ * SignTxnSignatureRequest =>
+ *                         <= SignTxnSignatureResponse
+ */
+
+enum SignTxnStatus {
+  SIGN_TXN_STATUS_INIT = 0;
+  SIGN_TXN_STATUS_CONFIRM = 1;
+  SIGN_TXN_STATUS_VERIFY = 2;
+  SIGN_TXN_STATUS_PASSPHRASE = 3;
+  SIGN_TXN_STATUS_PIN = 4;
+  SIGN_TXN_STATUS_CARD = 5;
+}
+
+message SignTxnInitiateRequest {
+  bytes walletId = 1;
+  repeated common.DerivationPath derivationPath = 2;
+}
+
+message SignTxnConfirmationResponse {
+}
+
+message SignTxnMetaResponse {
+  int32 version = 1;
+
+  uint32 input_size = 2;
+  uint32 output_size = 3;
+
+  uint32 locktime = 4;
+  uint32 hash_type = 5;
+}
+
+message SignTxnInputRequest {
+  uint32 index = 1;
+}
+
+message SignTxnInputResponse {
+  bytes prev_txn = 1;
+  bytes prev_txn_hash = 2;
+
+  uint32 prev_index = 3;
+  int64 value = 4;
+  bytes scriptPubKey = 5;
+  uint32 sequence = 6;
+
+  uint32 chainIndex = 7;
+  uint32 addressIndex = 8;
+}
+
+message SignTxnOutputRequest {
+  uint32 index = 1;
+}
+
+message SignTxnOutputResponse {
+  int64 value = 1;
+  bytes scriptPubKey = 2;
+
+  bool is_change = 3;
+  optional uint32 chainIndex = 4;
+  optional uint32 addressIndex = 5;
+}
+
+message SignTxnVerifiedResponse {
+}
+
+message SignTxnSignatureRequest {
+  uint32 index = 1;
+}
+
+message SignTxnSignatureResponse {
+  bytes signature = 1;
+}
+
+message SignTxnRequest {
+  oneof request {
+    SignTxnInitiateRequest initiate = 1;
+    SignTxnMetaResponse meta = 2;
+    SignTxnInputResponse input = 3;
+    SignTxnOutputResponse output = 4;
+    SignTxnSignatureRequest signature = 5;
+  }
+}
+
+message SignTxnResponse {
+  oneof response {
+    SignTxnConfirmationResponse confirmation = 1;
+    SignTxnInputRequest input = 2;
+    SignTxnOutputRequest output = 3;
+    SignTxnVerifiedResponse verified = 4;
+    SignTxnSignatureResponse signature = 5;
+
+    error.CoreError core_error = 6;
+  }
+}
