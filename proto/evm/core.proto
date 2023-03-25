@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "evm/get_public_keys.proto";
+
+package evm;
+
+message Query {
+  oneof request {
+    GetPublicKeysRequest get_public_keys = 1;
+  }
+}
+
+message Result {
+  oneof response {
+    GetPublicKeysResponse get_public_keys = 1;
+  }
+}

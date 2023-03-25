@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+import "common.proto";
+import "error.proto";
+
+package evm;
+
+enum GetPublicKeysStatus {
+  GET_PUBLIC_KEYS_STATUS_INIT = 0;
+  GET_PUBLIC_KEYS_STATUS_CONFIRM = 1;
+  GET_PUBLIC_KEYS_STATUS_PASSPHRASE = 2;
+  GET_PUBLIC_KEYS_STATUS_PIN = 3;
+  GET_PUBLIC_KEYS_STATUS_CARD = 4;
+  GET_PUBLIC_KEYS_STATUS_VERIFY = 5;
+}
+
+enum GetPublicKeyFormat {
+  DEFAULT = 0;
+  HARMONY = 1;
+}
+
+message GetPublicKeysDerivationPath {
+  repeated common.DerivationPath path = 1;
+}
+
+message GetPublicKeysIntiateRequest {
+  bytes wallet_id = 1;
+
+  /*
+   * address: m/44'/60'/0'/0/0
+   */
+  repeated GetPublicKeysDerivationPath derivation_paths = 2;
+
+  bool do_verify = 3;
+
+  uint32 chain_id = 4;
+
+  GetPublicKeyFormat format = 5;
+}
+
+message GetPublicKeysResultResponse {
+  repeated string public_keys = 1;
+}
+
+message GetPublicKeysRequest {
+  oneof request {
+    GetPublicKeysIntiateRequest initiate = 1;
+  }
+}
+
+message GetPublicKeysResponse {
+  oneof response {
+    GetPublicKeysResultResponse result = 1;
+
+    error.CoreError core_error = 2;
+  }
+}
