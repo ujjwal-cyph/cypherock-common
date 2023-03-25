@@ -1,17 +1,20 @@
 syntax = "proto3";
 
 import "evm/get_public_keys.proto";
+import "evm/sign_txn.proto";
 
 package evm;
 
 message Query {
   oneof request {
     GetPublicKeysRequest get_public_keys = 1;
+    SignTxnRequest sign_txn = 2;
   }
 }
 
 message Result {
   oneof response {
     GetPublicKeysResponse get_public_keys = 1;
+    SignTxnResponse sign_txn = 2;
   }
 }

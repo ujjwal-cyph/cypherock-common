@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package evm;
+
+enum AddressFormat {
+  DEFAULT = 0;
+  HARMONY = 1;
+}
+

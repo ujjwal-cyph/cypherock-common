@@ -3,6 +3,8 @@ syntax = "proto3";
 import "common.proto";
 import "error.proto";
 
+import "evm/common.proto";
+
 package evm;
 
 enum GetPublicKeysStatus {
@@ -12,11 +14,6 @@ enum GetPublicKeysStatus {
   GET_PUBLIC_KEYS_STATUS_PIN = 3;
   GET_PUBLIC_KEYS_STATUS_CARD = 4;
   GET_PUBLIC_KEYS_STATUS_VERIFY = 5;
-}
-
-enum GetPublicKeyFormat {
-  DEFAULT = 0;
-  HARMONY = 1;
 }
 
 message GetPublicKeysDerivationPath {
@@ -33,9 +30,9 @@ message GetPublicKeysIntiateRequest {
 
   bool do_verify = 3;
 
-  uint32 chain_id = 4;
+  bytes chain_id = 4;
 
-  GetPublicKeyFormat format = 5;
+  AddressFormat format = 5;
 }
 
 message GetPublicKeysResultResponse {
