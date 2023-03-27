@@ -74,8 +74,7 @@ message SignTypedDataStruct {
 message SignMsgInitiateRequest {
   bytes walletId = 1;
   repeated common.DerivationPath derivationPath = 2;
-  bytes chain_id = 3;
-  SignMsgType messageType = 4; 
+  SignMsgType messageType = 3; 
 }
 
 message SignMsgDataResponse {
