@@ -12,3 +12,17 @@ message Version {
   uint32 minor = 2;
   uint32 patch = 3;
 }
+
+message ChunkResponse {
+  bytes chunk = 1;
+
+  // Remaining size of chunks in bytes (excluding current chunk)
+  uint32 remaining_size = 2;
+
+  uint32 chunk_index = 3;
+  uint32 total_chunks = 4;
+}
+
+message ChunkRequest {
+  uint32 chunk_index = 1;
+}

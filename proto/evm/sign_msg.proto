@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+import "common.proto";
+import "error.proto";
+
+package evm;
+
+/**
+ * Example:
+ *
+ *        Host                       Device
+ *
+ * SignMsgInitiateRequest  => 
+ *                         <= SignMsgDataRequest
+ * SignMsgDataResponse   =>
+ *                         <= SignMsgDataRequest
+ * SignMsgDataResponse   =>
+ *
+ * ******** Device has all transaction information ********
+ *      
+ *      After stitching all chunks the device will 
+ *      have message data in bytes.
+ *
+ *      If the msg type is TypedData, use 
+ *      `SignTypedDataStruct` to decode the value.
+ *      
+ * ********************************************************
+ *
+ *                         <= SignMsgSignatureResponse
+ */
+enum SignMsgStatus {
+  SIGN_MSG_STATUS_INIT = 0;
+  SIGN_MSG_STATUS_CONFIRM = 1;
+  SIGN_MSG_STATUS_VERIFY = 2;
+  SIGN_MSG_STATUS_PASSPHRASE = 3;
+  SIGN_MSG_STATUS_PIN = 4;
+  SIGN_MSG_STATUS_CARD = 5;
+}
+
+enum SignMsgType {
+  SIGN_MSG_TYPE_ETH_SIGN = 0;
+  SIGN_MSG_TYPE_PERSONAL_SIGN = 1;
+  SIGN_MSG_TYPE_SIGN_TYPED_DATA = 2;
+}
+
+enum Eip712DataType {
+  EIP_712_DATA_TYPE_UINT = 0;
+  EIP_712_DATA_TYPE_INT = 1;
+  EIP_712_DATA_TYPE_BYTES = 2;
+  EIP_712_DATA_TYPE_STRING = 3;
+  EIP_712_DATA_TYPE_BOOL = 4;
+  EIP_712_DATA_TYPE_ADDRESS = 5;
+  EIP_712_DATA_TYPE_ARRAY = 6;
+  EIP_712_DATA_TYPE_STRUCT = 7;
+}
+
+message SignTypedDataNode {
+  string name = 1; 
+  Eip712DataType type = 2; 
+  uint32 size = 3; 
+  string struct_name = 4; 
+
+  optional bytes data = 5;
+  optional bytes type_hash = 6; 
+
+  repeated SignTypedDataNode children = 7;
+}
+
+message SignTypedDataStruct {
+  SignTypedDataNode domain = 1;
+  SignTypedDataNode message = 2;
+}
+
+message SignMsgInitiateRequest {
+  bytes walletId = 1;
+  repeated common.DerivationPath derivationPath = 2;
+  bytes chain_id = 3;
+  SignMsgType messageType = 4; 
+}
+
+message SignMsgDataResponse {
+  common.ChunkResponse chunk_response = 1;
+}
+
+message SignMsgDataRequest {
+  common.ChunkRequest chunk_request = 1;
+}
+
+message SignMsgRequest {
+  oneof request {
+    SignMsgInitiateRequest initiate = 1;
+    SignMsgDataResponse msg_data = 2;
+  }
+}
+
+message SignMsgSignatureResponse {
+  bytes r = 1;
+  bytes s = 2;
+  bytes v = 3;
+}
+
+message SignMsgResponse {
+  oneof response {
+    SignMsgDataRequest msg_data = 1;
+    SignMsgSignatureResponse signature = 2;
+
+    error.CoreError core_error = 3;
+  }
+}
