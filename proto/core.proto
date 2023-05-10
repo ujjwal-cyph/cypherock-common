@@ -26,6 +26,18 @@ enum CmdState {
   CMD_STATE_INVALID_CMD = 6;
 }
 
+enum ErrorType {
+  NO_ERROR = 0;
+  UNKNOWN_APP = 1;
+  INVALID_MSG = 2;
+  APP_NOT_ACTIVE = 3;
+};
+
+message Error {
+  uint32 applet_id = 1;
+  ErrorType type = 2;
+}
+
 message Status {
   DeviceWaitingOn device_waiting_on = 1;
   DeviceIdleState device_idle_state = 2;
@@ -38,17 +50,11 @@ message Status {
 
 message Command {
   uint32 applet_id = 1;
-  bytes data = 2;
 }
 
-message Query {
-  oneof request {
+message Msg {
+  oneof type {
     Command cmd = 1;
-  }
-}
-
-message Result {
-  oneof response {
-    Command cmd = 1;
+    Error error = 2;
   }
 }
