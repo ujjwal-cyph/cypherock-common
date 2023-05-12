@@ -33,7 +33,7 @@ enum ErrorType {
   APP_NOT_ACTIVE = 3;
 };
 
-message Error {
+message ErrorCmd {
   uint32 applet_id = 1;
   ErrorType type = 2;
 }
@@ -55,6 +55,6 @@ message Command {
 message Msg {
   oneof type {
     Command cmd = 1;
-    Error error = 2;
+    ErrorCmd error = 2;
   }
 }

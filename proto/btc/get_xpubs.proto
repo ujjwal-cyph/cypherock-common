@@ -40,6 +40,6 @@ message GetXpubsResponse {
   oneof response {
     GetXpubsResultResponse result = 1;
 
-    error.CoreError core_error = 2;
+    error.CommonError common_error = 2;
   }
 }
