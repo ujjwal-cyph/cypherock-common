@@ -68,6 +68,6 @@ message AuthDeviceResponse {
     AuthDeviceSerialSigResponse serial_signature = 1;
     AuthDeviceChallengeSigResponse challenge_signature = 2;
 
-    error.CoreError core_error = 3;
+    error.CommonError common_error = 3;
   }
 }
