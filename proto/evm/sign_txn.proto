@@ -64,6 +64,6 @@ message SignTxnResponse {
     SignTxnDataRequest txn_data = 1;
     SignTxnSignatureResponse signature = 2;
 
-    error.CoreError core_error = 3;
+    error.CommonError common_error = 3;
   }
 }

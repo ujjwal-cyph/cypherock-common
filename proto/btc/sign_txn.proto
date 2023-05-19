@@ -126,6 +126,6 @@ message SignTxnResponse {
     SignTxnVerifiedResponse verified = 4;
     SignTxnSignatureResponse signature = 5;
 
-    error.CoreError core_error = 6;
+    error.CommonError common_error = 6;
   }
 }

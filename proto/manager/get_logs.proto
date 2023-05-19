@@ -49,7 +49,7 @@ message GetLogsResponse {
   oneof response {
     GetLogsDataResponse logs = 1;
 
-    error.CoreError core_error = 2;
+    error.CommonError common_error = 2;
     GetLogsErrorResponse error = 3;
   }
 }

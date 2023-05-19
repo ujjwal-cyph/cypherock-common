@@ -103,6 +103,6 @@ message SignMsgResponse {
     SignMsgDataRequest msg_data = 1;
     SignMsgSignatureResponse signature = 2;
 
-    error.CoreError core_error = 3;
+    error.CommonError common_error = 3;
   }
 }

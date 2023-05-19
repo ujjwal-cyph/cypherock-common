@@ -74,6 +74,6 @@ message AuthDeviceResponse {
     AuthDeviceChallengeSigResponse challenge_signature = 2;
     AuthDeviceCompletion flow_complete = 3;
     
-    error.CoreError core_error = 4;
+    error.CommonError common_error = 3;
   }
 }
