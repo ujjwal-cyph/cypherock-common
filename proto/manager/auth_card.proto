@@ -13,7 +13,7 @@ package manager;
  * AuthCardChallengeRequest =>
  *                            <= AuthCardChallengeSigResponse
  * AuthCardResult           =>
- *                            <= AuthCardFlowCmpleteResponse
+ *                            <= AuthCardFlowCompleteResponse
  */
 
 /**
@@ -23,7 +23,7 @@ package manager;
  * AuthCardInitiateRequest  => 
  *                            <= AuthCardSerialSigResponse
  * AuthCardResult           =>
- *                            <= AuthCardFlowCmpleteResponse
+ *                            <= AuthCardFlowCompleteResponse
  */
 
 enum AuthCardStatus {
@@ -56,7 +56,7 @@ message AuthCardChallengeSigResponse {
   bytes signature = 1;
 }
 
-message AuthCardFlowCmpleteResponse {
+message AuthCardFlowCompleteResponse {
 }
 
 message AuthCardRequest {
@@ -71,7 +71,7 @@ message AuthCardResponse {
   oneof response {
     AuthCardSerialSigResponse serial_signature = 1;
     AuthCardChallengeSigResponse challenge_signature = 2;
-    error.CoreError core_error = 3;
-    AuthCardFlowCmpleteResponse flow_complete = 4;
+    error.CommonError common_error = 3;
+    AuthCardFlowCompleteResponse flow_complete = 4;
   }
 }
