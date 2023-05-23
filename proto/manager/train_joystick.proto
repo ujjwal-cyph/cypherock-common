@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+import "error.proto";
+
+package manager;
+
+enum JoystickTrainStatus {
+  USER_TRAINING_INIT = 0;
+  USER_TRAINING_UP = 1;
+  USER_TRAINING_RIGHT = 2;
+  USER_TRAINING_DOWN = 3;
+  USER_TRAINING_LEFT = 4;
+  USER_TRAINING_CENTER = 5;
+}
+
+message JoystickTrainRequest {
+}
+
+message TrainJoystickRequest {
+  oneof request {
+    JoystickTrainRequest joystick = 1;
+  }
+}
+
+message JoystickTrainResult {
+  bool is_success = 1;
+}
+
+message TrainJoystickResponse {
+  oneof response {
+    JoystickTrainResult joystick = 1;
+
+    error.CommonError common_error = 3;
+  }
+}
