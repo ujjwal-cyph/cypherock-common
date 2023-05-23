@@ -4,31 +4,31 @@ import "error.proto";
 
 package manager;
 
-enum JoystickTrainStatus {
-  USER_TRAINING_INIT = 0;
-  USER_TRAINING_UP = 1;
-  USER_TRAINING_RIGHT = 2;
-  USER_TRAINING_DOWN = 3;
-  USER_TRAINING_LEFT = 4;
-  USER_TRAINING_CENTER = 5;
+enum TrainJoystickStatus {
+  TRAIN_JOYSTICK_INIT = 0;
+  TRAIN_JOYSTICK_UP = 1;
+  TRAIN_JOYSTICK_RIGHT = 2;
+  TRAIN_JOYSTICK_DOWN = 3;
+  TRAIN_JOYSTICK_LEFT = 4;
+  TRAIN_JOYSTICK_CENTER = 5;
 }
 
-message JoystickTrainRequest {
+message TrainJoystickInitiate {
 }
 
 message TrainJoystickRequest {
   oneof request {
-    JoystickTrainRequest joystick = 1;
+    TrainJoystickInitiate initiate = 1;
   }
 }
 
-message JoystickTrainResult {
+message TrainJoystickResult {
   bool is_success = 1;
 }
 
 message TrainJoystickResponse {
   oneof response {
-    JoystickTrainResult joystick = 1;
+    TrainJoystickResult joystick = 1;
 
     error.CommonError common_error = 3;
   }

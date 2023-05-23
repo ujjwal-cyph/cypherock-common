@@ -9,22 +9,22 @@ message ExistingWalletItem {
   string name = 2;
 }
 
-message CardCheckupRequest {
+message TrainCardInitiate {
 }
 
 message TrainCardRequest {
   oneof request {
-    CardCheckupRequest card_check = 1;
+    TrainCardInitiate initiate = 1;
   }
 }
 
-message CardCheckupResult {
+message TrainCardResult {
   repeated ExistingWalletItem wallet_list = 1;
 }
 
 message TrainCardResponse {
   oneof response {
-    CardCheckupResult card_check = 1;
+    TrainCardResult card_train = 1;
 
     error.CommonError common_error = 2;
   }
