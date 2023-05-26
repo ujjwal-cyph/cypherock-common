@@ -13,6 +13,7 @@ package manager;
  * AuthCardChallengeRequest =>
  *                            <= AuthCardChallengeSigResponse
  * AuthCardResult           =>
+ *                            <= AuthCardFlowCompleteResponse
  */
 
 /**
@@ -22,15 +23,20 @@ package manager;
  * AuthCardInitiateRequest  => 
  *                            <= AuthCardSerialSigResponse
  * AuthCardResult           =>
+ *                            <= AuthCardFlowCompleteResponse
  */
 
 enum AuthCardStatus {
   AUTH_CARD_STATUS_INIT = 0;
   AUTH_CARD_STATUS_USER_CONFIRMED = 1;
+  AUTH_CARD_STATUS_SERIAL_SIGNED = 2;
+  AUTH_CARD_STATUS_CHALLENGE_SIGNED = 3;
+  AUTH_CARD_STATUS_PAIRING_DONE = 4;
 }
 
 message AuthCardInitiateRequest {
   optional uint32 card_index = 1;
+  optional bool pair_card = 2;
 }
 
 message AuthCardChallengeRequest {
@@ -50,6 +56,9 @@ message AuthCardChallengeSigResponse {
   bytes signature = 1;
 }
 
+message AuthCardFlowCompleteResponse {
+}
+
 message AuthCardRequest {
   oneof request {
     AuthCardInitiateRequest initiate = 1;
@@ -62,7 +71,7 @@ message AuthCardResponse {
   oneof response {
     AuthCardSerialSigResponse serial_signature = 1;
     AuthCardChallengeSigResponse challenge_signature = 2;
-
     error.CommonError common_error = 3;
+    AuthCardFlowCompleteResponse flow_complete = 4;
   }
 }
