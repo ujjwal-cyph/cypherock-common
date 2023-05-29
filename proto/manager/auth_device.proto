@@ -13,6 +13,7 @@ package manager;
  * AuthDeviceChallengeRequest =>
  *                            <= AuthDeviceChallengeSigResponse
  * AuthDeviceResult           =>
+ *                            <= AuthDeviceFlowCompletion
  */
 
 /**
@@ -22,6 +23,7 @@ package manager;
  * AuthDeviceInitiateRequest  => 
  *                            <= AuthDeviceSerialSigResponse
  * AuthDeviceResult           =>
+ *                            <= AuthDeviceFlowCompletion
  */
 
 /**
@@ -82,15 +84,19 @@ enum AuthDeviceErrorType {
 }
 
 message AuthDeviceErrorResponse {
-  AuthDeviceErrorType type = 1 ;
+  AuthDeviceErrorType type = 1;
+}
+
+message AuthDeviceCompletion {
 }
 
 message AuthDeviceResponse {
   oneof response {
     AuthDeviceSerialSigResponse serial_signature = 1;
     AuthDeviceChallengeSigResponse challenge_signature = 2;
-
+    AuthDeviceCompletion flow_complete = 4;
+    AuthDeviceErrorResponse error = 5;
+    
     error.CommonError common_error = 3;
-    AuthDeviceErrorResponse error = 4;
   }
 }
