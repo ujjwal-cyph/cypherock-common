@@ -50,15 +50,29 @@ enum UserRejection {
   USER_REJECTION_METADATA = 5;
 }
 
+enum DataFlow {
+  DATA_FLOW_DECODING_FAILED = 0; // will this cover situation of enum out of range?
+
+  /* query received is: invalid or when in unserviceable state or of different
+   app_function */
+  DATA_FLOW_INVALID_QUERY = 1;
+  DATA_FLOW_FIELD_MISSING = 2;
+
+  /* Wrong request is received in app_function */
+  DATA_FLOW_INVALID_REQUEST = 3;
+  DATA_FLOW_INACTIVITY_TIMEOUT = 4;
+}
+
 message CommonError {
   // For future error codes
-  reserved 2 to 3;
+  reserved 3;
   reserved 5 to 10;
   reserved 14 to 20;
 
   oneof error {
     // ****** Protocol specific errors ******
     uint32 unknown_error = 1;
+    DataFlow corrupt_data = 2;
 
     // The user needs to complete device setup
     uint32 device_setup_required = 4;
@@ -73,7 +87,9 @@ message CommonError {
 
     // No wallet exist on device
     NoWalletExists no_wallet_exists = 13;
-    
+
+    // ****** User action errors ******
+
     // Card Error
     CardError card_error = 21;
 

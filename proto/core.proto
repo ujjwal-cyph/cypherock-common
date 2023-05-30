@@ -28,8 +28,11 @@ enum CmdState {
 
 enum ErrorType {
   NO_ERROR = 0;
+  /** Invalid/unknown applet-id value */
   UNKNOWN_APP = 1;
+  /** Decoding failed */
   INVALID_MSG = 2;
+  /** Cannot start app as other app is running */
   APP_NOT_ACTIVE = 3;
 };
 
