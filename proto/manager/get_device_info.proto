@@ -11,15 +11,13 @@ message SupportedAppletItem {
   common.Version version = 2;
 }
 
-message InitialStateItem {
-  bool is_completed = 1;
-  optional uint32 state = 2;
-}
-
-message InitialStates {
-  InitialStateItem auth_device = 1;
-  InitialStateItem user_training = 2;
-  InitialStateItem auth_cards = 3;
+enum OnboardingStep {
+  ONBOARDING_VIRGIN_DEVICE = 0;
+  ONBOARDING_DEVICE_AUTH = 1;
+  ONBOARDING_JOYSTICK_TRAINING = 2;
+  ONBOARDING_CARD_CHECKUP = 3;
+  ONBOARDING_CARD_AUTHENTICATION = 4;
+  ONBOARDING_COMPLETE = 5;
 }
 
 message GetDeviceInfoIntiateRequest {
@@ -32,7 +30,7 @@ message GetDeviceInfoResultResponse {
   repeated SupportedAppletItem applet_list = 4;
 
   bool is_initial = 5;
-  InitialStates initial_states = 6;
+  OnboardingStep onboarding_step = 6;
 }
 
 message GetDeviceInfoRequest {
