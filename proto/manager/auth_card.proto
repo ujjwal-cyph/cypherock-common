@@ -36,7 +36,11 @@ enum AuthCardStatus {
 
 message AuthCardInitiateRequest {
   optional uint32 card_index = 1;
-  optional bool pair_card = 2;
+  /**
+    * true: allow pair card: 3 card taps (false 3rd beep if already paired)
+    * false, undefined: do not pair card: 2 card taps
+    */
+  optional bool is_pair_required = 2;
 }
 
 message AuthCardChallengeRequest {
