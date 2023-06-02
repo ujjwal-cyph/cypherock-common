@@ -4,6 +4,13 @@ import "error.proto";
 
 package manager;
 
+/**
+ * TrainCardInitiate        =>
+ *                          <=    TrainCardResult
+ * TrainCardVerification    =>
+ *                          <=    TrainCardComplete
+ */
+
 message ExistingWalletItem {
   bytes id = 1;
   string name = 2;
@@ -12,20 +19,30 @@ message ExistingWalletItem {
 message TrainCardInitiate {
 }
 
+message TrainCardVerification {
+  bool self_created = 1;
+}
+
 message TrainCardRequest {
   oneof request {
     TrainCardInitiate initiate = 1;
+    TrainCardVerification wallet_verify = 2;
   }
 }
 
 message TrainCardResult {
   repeated ExistingWalletItem wallet_list = 1;
+  bool card_paired = 2;
+}
+
+message TrainCardComplete {
 }
 
 message TrainCardResponse {
   oneof response {
     TrainCardResult result = 1;
+    TrainCardComplete flow_complete = 2;
 
-    error.CommonError common_error = 2;
+    error.CommonError common_error = 3;
   }
 }
