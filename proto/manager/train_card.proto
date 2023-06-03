@@ -11,6 +11,11 @@ package manager;
  *                          <=    TrainCardComplete
  */
 
+enum TrainCardStatus {
+  TRAIN_CARD_STATUS_INIT = 0;
+  TRAIN_CARD_STATUS_CARD_TAPPED = 1;
+}
+
 message ExistingWalletItem {
   bytes id = 1;
   string name = 2;
@@ -23,19 +28,19 @@ message TrainCardVerification {
   bool self_created = 1;
 }
 
-message TrainCardRequest {
-  oneof request {
-    TrainCardInitiate initiate = 1;
-    TrainCardVerification wallet_verify = 2;
-  }
-}
-
 message TrainCardResult {
   repeated ExistingWalletItem wallet_list = 1;
   bool card_paired = 2;
 }
 
 message TrainCardComplete {
+}
+
+message TrainCardRequest {
+  oneof request {
+    TrainCardInitiate initiate = 1;
+    TrainCardVerification wallet_verify = 2;
+  }
 }
 
 message TrainCardResponse {
