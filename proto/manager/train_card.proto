@@ -5,10 +5,15 @@ import "error.proto";
 package manager;
 
 /**
+ * When at least one wallet is detected on the card
  * TrainCardInitiate        =>
  *                          <=    TrainCardResult
  * TrainCardVerification    =>
  *                          <=    TrainCardComplete
+ *
+ * When no wallets are detected on the card
+ * TrainCardInitiate        =>
+ *                          <=    TrainCardResult
  */
 
 enum TrainCardStatus {
