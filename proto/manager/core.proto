@@ -8,6 +8,8 @@ import "manager/get_logs.proto";
 import "manager/train_joystick.proto";
 import "manager/train_card.proto";
 
+import "error.proto";
+
 package manager;
 
 message Query {
@@ -31,5 +33,6 @@ message Result {
     GetLogsResponse get_logs = 5;
     TrainJoystickResponse train_joystick = 6;
     TrainCardResponse train_card = 7;
+    error.CommonError common_error = 8;
   }
 }
