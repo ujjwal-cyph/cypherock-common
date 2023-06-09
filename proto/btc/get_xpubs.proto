@@ -25,6 +25,9 @@ message GetXpubsIntiateRequest {
   repeated GetXpubDerivationPath derivation_paths = 2;
 }
 
+message GetXpubsFetchNextRequest {
+}
+
 message GetXpubsResultResponse {
   repeated string xpubs = 1;
 }
@@ -32,6 +35,7 @@ message GetXpubsResultResponse {
 message GetXpubsRequest {
   oneof request {
     GetXpubsIntiateRequest initiate = 1;
+    GetXpubsFetchNextRequest fetch_next = 2;
   }
 }
 
