@@ -53,8 +53,7 @@ enum UserRejection {
 enum DataFlow {
   DATA_FLOW_DECODING_FAILED = 0; // will this cover situation of enum out of range?
 
-  /* query received is: invalid or when in unserviceable state or of different
-   app_function */
+  /* query received is: invalid or is of different app_function (eg. device auth in between get logs) */
   DATA_FLOW_INVALID_QUERY = 1;
   DATA_FLOW_FIELD_MISSING = 2;
 
@@ -62,6 +61,9 @@ enum DataFlow {
   DATA_FLOW_INVALID_REQUEST = 3;
   DATA_FLOW_INACTIVITY_TIMEOUT = 4;
   DATA_FLOW_INVALID_DATA = 5;
+  /* query received is: when app in unserviceable state (eg. export wallet request before on-boarding,
+     export wallet request on unauthenticated device on main */
+  DATA_FLOW_QUERY_NOT_ALLOWED = 6;
 }
 
 message CommonError {
