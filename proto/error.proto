@@ -61,6 +61,7 @@ enum DataFlow {
   /* Wrong request is received in app_function */
   DATA_FLOW_INVALID_REQUEST = 3;
   DATA_FLOW_INACTIVITY_TIMEOUT = 4;
+  DATA_FLOW_INVALID_DATA = 5;
 }
 
 message CommonError {
