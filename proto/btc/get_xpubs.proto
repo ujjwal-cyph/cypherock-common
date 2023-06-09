@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-import "common.proto";
 import "error.proto";
 
 package btc;
@@ -14,7 +13,7 @@ enum GetXpubsStatus {
 }
 
 message GetXpubDerivationPath {
-  repeated common.DerivationPath path = 1;
+  repeated uint32 path = 1;
 }
 
 message GetXpubsIntiateRequest {
