@@ -9,6 +9,7 @@ message WalletItem {
   string name = 2;
   bool hasPin = 3;
   bool hasPassphrase = 4;
+  bool isValid = 5;
 }
 
 message GetWalletsIntiateRequest {
