@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-import "common.proto";
 import "error.proto";
 
 package btc;
@@ -20,11 +19,11 @@ message GetPublicKeyIntiateRequest {
   /*
    * address: m/44'/0'/0'/0/0
    */
-  repeated common.DerivationPath derivation_path = 2;
+  repeated uint32 derivation_path = 2;
 }
 
 message GetPublicKeyResultResponse {
-  string public_key = 1;
+  bytes public_key = 1;
 }
 
 message GetPublicKeyRequest {
