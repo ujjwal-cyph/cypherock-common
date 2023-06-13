@@ -3,6 +3,17 @@ syntax = "proto3";
 import "error.proto";
 
 package btc;
+/**
+ * Example of successful xpub generation
+ *
+ *        Host                       Card
+ * GetXpubsIntiateRequest  =>
+ *                            <= GetXpubsResultResponse (1-10 xpubs)
+ * GetXpubsFetchNextRequest =>
+ *                            <= GetXpubsResultResponse (11-20 xpubs)
+ * GetXpubsFetchNextRequest =>
+ *                            <= GetXpubsResultResponse (21-30 xpubs)
+ */
 
 enum GetXpubsStatus {
   GET_XPUBS_STATUS_INIT = 0;
