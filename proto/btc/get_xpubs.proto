@@ -6,7 +6,7 @@ package btc;
 /**
  * Example of successful xpub generation
  *
- *        Host                       Card
+ *        Host                       Device
  * GetXpubsIntiateRequest  =>
  *                            <= GetXpubsResultResponse (1-10 xpubs)
  * GetXpubsFetchNextRequest =>

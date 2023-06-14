@@ -7,7 +7,7 @@ package manager;
 /**
  * Example of successful authentication
  *
- *        Host                       Card
+ *        Host                       Device
  * GetLogsInitiateRequest  => 
  *                            <= GetLogsDataResponse (hasMore: true)
  * GetLogsFetchNextRequest =>
