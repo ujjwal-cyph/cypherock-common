@@ -51,18 +51,34 @@ enum UserRejection {
 }
 
 enum DataFlow {
+  /* protobuf decoding by nanopb api failed */
   DATA_FLOW_DECODING_FAILED = 0; // will this cover situation of enum out of range?
 
-  /* query received is: invalid or is of different app_function (eg. device auth in between get logs) */
+  /* query received is: invalid or is of different app_function (eg. device
+   * auth in between get logs)
+   */
   DATA_FLOW_INVALID_QUERY = 1;
+
+  /* protobuf `optional` fields when checked on receiving end was absent. */
   DATA_FLOW_FIELD_MISSING = 2;
 
-  /* Wrong request is received in app_function */
+  /* Wrong request is received in app_function. could be at start of flow
+   * or in-between the flow
+   */
   DATA_FLOW_INVALID_REQUEST = 3;
+
+  /* inactivity during wait-for-data from host. In-between a flow */
   DATA_FLOW_INACTIVITY_TIMEOUT = 4;
+
+  /* when the flow specific data validity fails. could be at start of flow
+   * or in-between the flow
+   */
   DATA_FLOW_INVALID_DATA = 5;
-  /* query received is: when app in unserviceable state (eg. export wallet request before on-boarding,
-     export wallet request on unauthenticated device on main */
+
+  /* query received is: when app in unserviceable state (eg. export wallet
+   * request before on-boarding, export wallet request on unauthenticated
+   * device on main
+   */
   DATA_FLOW_QUERY_NOT_ALLOWED = 6;
 }
 
