@@ -1,9 +1,19 @@
 syntax = "proto3";
 
-import "common.proto";
 import "error.proto";
 
 package btc;
+/**
+ * Example of successful xpub generation
+ *
+ *        Host                       Device
+ * GetXpubsIntiateRequest  =>
+ *                            <= GetXpubsResultResponse (1-10 xpubs)
+ * GetXpubsFetchNextRequest =>
+ *                            <= GetXpubsResultResponse (11-20 xpubs)
+ * GetXpubsFetchNextRequest =>
+ *                            <= GetXpubsResultResponse (21-30 xpubs)
+ */
 
 enum GetXpubsStatus {
   GET_XPUBS_STATUS_INIT = 0;
@@ -14,7 +24,7 @@ enum GetXpubsStatus {
 }
 
 message GetXpubDerivationPath {
-  repeated common.DerivationPath path = 1;
+  repeated uint32 path = 1;
 }
 
 message GetXpubsIntiateRequest {
@@ -26,6 +36,9 @@ message GetXpubsIntiateRequest {
   repeated GetXpubDerivationPath derivation_paths = 2;
 }
 
+message GetXpubsFetchNextRequest {
+}
+
 message GetXpubsResultResponse {
   repeated string xpubs = 1;
 }
@@ -33,6 +46,7 @@ message GetXpubsResultResponse {
 message GetXpubsRequest {
   oneof request {
     GetXpubsIntiateRequest initiate = 1;
+    GetXpubsFetchNextRequest fetch_next = 2;
   }
 }
 
