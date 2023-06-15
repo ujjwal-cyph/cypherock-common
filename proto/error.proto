@@ -36,6 +36,24 @@ enum CardError {
   CARD_ERROR_NOT_PAIRED = 1;
   // Crypto operation failed or unusable card
   CARD_ERROR_OPERATION_FAILED = 2;
+
+  CARD_SW_INCOMPATIBLE_APPLET = 3;        // Incompatible applet version
+  CARD_SW_NULL_POINTER_EXCEPTION = 4;     // Null pointer exception
+  CARD_SW_TRANSACTION_EXCEPTION = 5;      // Operation failed on card (Tx Exp)
+  CARD_SW_FILE_INVALID = 6;               // Tapped card family id mismatch
+  CARD_SW_SECURITY_CONDITIONS_NOT_SATISFIED = 7; // Security conditions not satisfied, i.e. pairing session invalid
+  CARD_SW_CONDITIONS_NOT_SATISFIED = 8;   // Wrong card sequence
+  CARD_SW_WRONG_DATA = 9;                 // Invalid APDU length
+  CARD_SW_FILE_NOT_FOUND = 10;            // Curropted card
+  CARD_SW_RECORD_NOT_FOUND = 11;          // Wallet does not exist on device
+  CARD_SW_FILE_FULL = 12;                 // Card is full
+  CARD_SW_CORRECT_LENGTH_00 = 13;         // Incorrect pin intered
+  CARD_SW_INVALID_INS = 14;               // Apllet unknown error
+  CARD_SW_NOT_PAIRED = 15;                // Card pairing to device missing
+  CARD_SW_CRYPTO_EXCEPTION = 16;          // Operation failed on card (Crypto Exp)
+  CARD_POW_SW_WALLET_LOCKED = 17;         // Locked wallet
+  CARD_SW_INS_BLOCKED = 18;               // Card health critical, migration required
+  CARD_SW_OUT_OF_BOUNDARY = 19;           // Operation failed on card (Out of boundary)
 }
 
 /*
