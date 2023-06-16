@@ -25,13 +25,13 @@ message FirmwareUpdateInitiateRequest {
   common.Version version = 1;
 }
 
+message FirmwareUpdateConfirmed {
+}
+
 message FirmwareUpdateRequest {
   oneof request {
     FirmwareUpdateInitiateRequest initiate = 1;
   }
-}
-
-message FirmwareUpdateConfirmed {
 }
 
 message FirmwareUpdateResponse {
