@@ -10,7 +10,7 @@ package manager;
  *
  *        Host                       Device
  * FirmwareUpdateInitiateRequest  => 
- *                                <= FirmwareUpdateConfirmed
+ *                                <= FirmwareUpdateConfirmedResponse
  */
 
 /**
@@ -25,7 +25,7 @@ message FirmwareUpdateInitiateRequest {
   common.Version version = 1;
 }
 
-message FirmwareUpdateConfirmed {
+message FirmwareUpdateConfirmedResponse {
 }
 
 message FirmwareUpdateRequest {
@@ -36,7 +36,7 @@ message FirmwareUpdateRequest {
 
 message FirmwareUpdateResponse {
   oneof response {
-    FirmwareUpdateConfirmed confirmed = 1;
+    FirmwareUpdateConfirmedResponse confirmed = 1;
     error.CommonError common_error = 2;
   }
 }
