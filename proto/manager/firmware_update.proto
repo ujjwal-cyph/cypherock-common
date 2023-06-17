@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+import "error.proto";
+import "common.proto";
+
+package manager;
+
+/**
+ * Example of firmware update confirmation
+ *
+ *        Host                       Device
+ * FirmwareUpdateInitiateRequest  => 
+ *                                <= FirmwareUpdateConfirmedResponse
+ */
+
+/**
+ * Example of firmware update rejection
+ *
+ *        Host                       Device
+ * FirmwareUpdateInitiateRequest  => 
+ *                                <= error.CommonError
+ */
+ 
+message FirmwareUpdateInitiateRequest {
+  common.Version version = 1;
+}
+
+message FirmwareUpdateConfirmedResponse {
+}
+
+message FirmwareUpdateRequest {
+  oneof request {
+    FirmwareUpdateInitiateRequest initiate = 1;
+  }
+}
+
+message FirmwareUpdateResponse {
+  oneof response {
+    FirmwareUpdateConfirmedResponse confirmed = 1;
+    error.CommonError common_error = 2;
+  }
+}

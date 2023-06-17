@@ -7,6 +7,7 @@ import "manager/auth_card.proto";
 import "manager/get_logs.proto";
 import "manager/train_joystick.proto";
 import "manager/train_card.proto";
+import "manager/firmware_update.proto";
 
 import "error.proto";
 
@@ -21,6 +22,7 @@ message Query {
     GetLogsRequest get_logs = 5;
     TrainJoystickRequest train_joystick = 6;
     TrainCardRequest train_card = 7;
+    FirmwareUpdateRequest firmware_update = 8;
   }
 }
 
@@ -33,6 +35,7 @@ message Result {
     GetLogsResponse get_logs = 5;
     TrainJoystickResponse train_joystick = 6;
     TrainCardResponse train_card = 7;
+    FirmwareUpdateResponse firmware_update = 9;
     error.CommonError common_error = 8;
   }
 }
