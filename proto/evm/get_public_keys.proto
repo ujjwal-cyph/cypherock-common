@@ -17,7 +17,7 @@ enum GetPublicKeysStatus {
 }
 
 message GetPublicKeysDerivationPath {
-  repeated common.DerivationPath path = 1;
+  repeated uint32 path = 1;
 }
 
 message GetPublicKeysIntiateRequest {
