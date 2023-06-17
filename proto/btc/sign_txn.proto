@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "common.proto";
-
 import "error.proto";
 
 package btc;
