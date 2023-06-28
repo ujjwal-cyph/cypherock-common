@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "common.proto";
-
 import "error.proto";
 
 package btc;
@@ -51,7 +49,7 @@ enum SignTxnStatus {
 
 message SignTxnInitiateRequest {
   bytes walletId = 1;
-  repeated common.DerivationPath derivationPath = 2;
+  repeated uint32 derivationPath = 2;
 }
 
 message SignTxnConfirmationResponse {
