@@ -73,7 +73,7 @@ message SignTypedDataStruct {
 
 message SignMsgInitiateRequest {
   bytes walletId = 1;
-  repeated common.DerivationPath derivationPath = 2;
+  repeated uint32 derivationPath = 2;
   SignMsgType messageType = 3; 
 }
 

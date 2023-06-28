@@ -2,11 +2,6 @@ syntax = "proto3";
 
 package common;
 
-message DerivationPath {
-  uint32 index = 1;
-  optional bool is_hardened = 2;
-}
-
 message Version {
   uint32 major = 1;
   uint32 minor = 2;

@@ -16,16 +16,34 @@ package manager;
 /**
  * Example of firmware update rejection
  *
+ * - With common error
+ *
  *        Host                       Device
  * FirmwareUpdateInitiateRequest  => 
  *                                <= error.CommonError
+ *
+ *
+ * - With update specific error
+ *
+ *        Host                       Device
+ * FirmwareUpdateInitiateRequest  => 
+ *                                <= FirmwareUpdateErrorResponse
  */
- 
+
+enum FirmwareUpdateError {
+  FIRMWARE_UPDATE_ERROR_UNKNOWN = 0;
+  FIRMWARE_UPDATE_ERROR_VERSION_NOT_ALLOWED = 1;
+}
+
 message FirmwareUpdateInitiateRequest {
   common.Version version = 1;
 }
 
 message FirmwareUpdateConfirmedResponse {
+}
+
+message FirmwareUpdateErrorResponse {
+  FirmwareUpdateError error = 1;
 }
 
 message FirmwareUpdateRequest {
@@ -38,5 +56,6 @@ message FirmwareUpdateResponse {
   oneof response {
     FirmwareUpdateConfirmedResponse confirmed = 1;
     error.CommonError common_error = 2;
+    FirmwareUpdateErrorResponse error = 3;
   }
 }
