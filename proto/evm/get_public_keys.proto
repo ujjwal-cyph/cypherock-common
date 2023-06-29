@@ -1,7 +1,8 @@
 syntax = "proto3";
 
-import "common.proto";
 import "error.proto";
+
+import "evm/common.proto";
 
 package evm;
 
