@@ -36,9 +36,8 @@ enum NoWalletExists {
  * For card specific errors, a card error Status word(SW) is returned, else `CARD_ERROR_UNKNOWN`.
  */
 enum CardError {
-  CARD_ERROR_UNKNOWN = 0;
-  CARD_ERROR_NOT_PAIRED = 1;
-  CARD_ERROR_OPERATION_FAILED = 2;              // Deprecated Error, Not used anymore
+  CARD_ERROR_UNKNOWN = 0;                     // Error logged locally on device but spcific case unknown
+  CARD_ERROR_NOT_PAIRED = 1;                  // Error occured as card is not paired.
 
   CARD_ERROR_SW_INCOMPATIBLE_APPLET = 3;        // Incompatible applet version
   CARD_ERROR_SW_NULL_POINTER_EXCEPTION = 4;     // Null pointer exception
