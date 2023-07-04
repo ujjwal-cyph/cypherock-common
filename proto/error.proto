@@ -31,11 +31,31 @@ enum NoWalletExists {
   NO_WALLET_EXISTS_PARTIAL_STATE = 1;
 }
 
+/*
+ * When the card operation fails, one of these errors is communicated by device.
+ * For card specific errors, a card error Status word(SW) is returned, else `CARD_ERROR_UNKNOWN`.
+ */
 enum CardError {
-  CARD_ERROR_UNKNOWN = 0;
-  CARD_ERROR_NOT_PAIRED = 1;
-  // Crypto operation failed or unusable card
-  CARD_ERROR_OPERATION_FAILED = 2;
+  CARD_ERROR_UNKNOWN = 0;                     // Error logged locally on device but spcific case unknown
+  CARD_ERROR_NOT_PAIRED = 1;                  // Error occured as card is not paired.
+
+  CARD_ERROR_SW_INCOMPATIBLE_APPLET = 3;        // Incompatible applet version
+  CARD_ERROR_SW_NULL_POINTER_EXCEPTION = 4;     // Null pointer exception
+  CARD_ERROR_SW_TRANSACTION_EXCEPTION = 5;      // Operation failed on card (Tx Exp)
+  CARD_ERROR_SW_FILE_INVALID = 6;               // Tapped card family id mismatch
+  CARD_ERROR_SW_SECURITY_CONDITIONS_NOT_SATISFIED = 7; // Security conditions not satisfied, i.e. pairing session invalid
+  CARD_ERROR_SW_CONDITIONS_NOT_SATISFIED = 8;   // Wrong card sequence
+  CARD_ERROR_SW_WRONG_DATA = 9;                 // Invalid APDU length
+  CARD_ERROR_SW_FILE_NOT_FOUND = 10;            // Curropted card
+  CARD_ERROR_SW_RECORD_NOT_FOUND = 11;          // Wallet does not exist on device
+  CARD_ERROR_SW_FILE_FULL = 12;                 // Card is full
+  CARD_ERROR_SW_CORRECT_LENGTH_00 = 13;         // Incorrect pin intered
+  CARD_ERROR_SW_INVALID_INS = 14;               // Apllet unknown error
+  CARD_ERROR_SW_NOT_PAIRED = 15;                // Card pairing to device missing
+  CARD_ERROR_SW_CRYPTO_EXCEPTION = 16;          // Operation failed on card (Crypto Exp)
+  CARD_ERROR_POW_SW_WALLET_LOCKED = 17;         // Locked wallet status word, POW meaning proof of word
+  CARD_ERROR_SW_INS_BLOCKED = 18;               // Card health critical, migration required
+  CARD_ERROR_SW_OUT_OF_BOUNDARY = 19;           // Operation failed on card (Out of boundary)
 }
 
 /*
