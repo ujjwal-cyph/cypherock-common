@@ -11,27 +11,27 @@ package btc;
  *
  * SignTxnInitiateRequest  => 
  *                         <= SignTxnConfirmationResponse
- * SignTxnMetaResponse     =>
+ * SignTxnMetadata         =>
+ *                         <= SignTxnMetadataAccepted
  *
  *
- *                         <= SignTxnInputRequest
- * SignTxnInputResponse    =>
- *                         <= SignTxnInputRequest
- * SignTxnInputResponse    =>
- *                         <= SignTxnInputRequest
- * SignTxnInputResponse    =>
+ * SignTxnInput            =>
+ *                         <= SignTxnInputAccepted
+ * SignTxnInput            =>
+ *                         <= SignTxnInputAccepted
+ * SignTxnInput            =>
+ *                         <= SignTxnInputAccepted
  *
  *
- *                         <= SignTxnOutputRequest
- * SignTxnOutputResponse   =>
- *                         <= SignTxnOutputRequest
- * SignTxnOutputResponse   =>
+ * SignTxnOutput           =>
+ *                         <= SignTxnOutputAccepted
+ * SignTxnOutput           =>
+ *                         <= SignTxnOutputAccepted
  *
  *
  * **** Device has all transaction information ****
  *
  *
- *                         <= SignTxnVerifiedResponse
  * SignTxnSignatureRequest =>
  *                         <= SignTxnSignatureResponse
  * SignTxnSignatureRequest =>
@@ -48,51 +48,52 @@ enum SignTxnStatus {
 }
 
 message SignTxnInitiateRequest {
-  bytes walletId = 1;
-  repeated uint32 derivationPath = 2;
+  bytes wallet_id = 1;
+  repeated uint32 derivation_path = 2;
 }
 
 message SignTxnConfirmationResponse {
 }
 
-message SignTxnMetaResponse {
-  int32 version = 1;
-
-  uint32 input_size = 2;
-  uint32 output_size = 3;
-
+message SignTxnMetadata {
+  // transaction output UTXO fields
+  uint32 version = 1;
+  uint32 input_count = 2;
+  uint32 output_count = 3;
   uint32 locktime = 4;
-  uint32 hash_type = 5;
+  uint32 sighash = 5;
 }
 
-message SignTxnInputRequest {
-  uint32 index = 1;
+message SignTxnMetadataAccepted {
 }
 
-message SignTxnInputResponse {
+message SignTxnInputAccepted {
+}
+
+message SignTxnInput {
   bytes prev_txn = 1;
   bytes prev_txn_hash = 2;
 
-  uint32 prev_index = 3;
-  int64 value = 4;
-  bytes scriptPubKey = 5;
+  uint32 prev_output_index = 3;
+  uint64 value = 4;
+  bytes script_pub_key = 5;
   uint32 sequence = 6;
 
-  uint32 chainIndex = 7;
-  uint32 addressIndex = 8;
+  uint32 change_index = 7;
+  uint32 address_index = 8;
 }
 
-message SignTxnOutputRequest {
-  uint32 index = 1;
+message SignTxnOutputAccepted {
 }
 
-message SignTxnOutputResponse {
+message SignTxnOutput {
+  // transaction output UTXO fields
   int64 value = 1;
-  bytes scriptPubKey = 2;
+  bytes script_pub_key = 2;
 
   bool is_change = 3;
-  optional uint32 chainIndex = 4;
-  optional uint32 addressIndex = 5;
+  // output change address index that should be checked on the HW device
+  optional uint32 changes_index = 4;
 }
 
 message SignTxnVerifiedResponse {
@@ -109,9 +110,9 @@ message SignTxnSignatureResponse {
 message SignTxnRequest {
   oneof request {
     SignTxnInitiateRequest initiate = 1;
-    SignTxnMetaResponse meta = 2;
-    SignTxnInputResponse input = 3;
-    SignTxnOutputResponse output = 4;
+    SignTxnMetadata meta = 2;
+    SignTxnInput input = 3;
+    SignTxnOutput output = 4;
     SignTxnSignatureRequest signature = 5;
   }
 }
@@ -119,9 +120,9 @@ message SignTxnRequest {
 message SignTxnResponse {
   oneof response {
     SignTxnConfirmationResponse confirmation = 1;
-    SignTxnInputRequest input = 2;
-    SignTxnOutputRequest output = 3;
-    SignTxnVerifiedResponse verified = 4;
+    SignTxnMetadataAccepted meta_accepted = 2;
+    SignTxnInputAccepted input_accepted = 3;
+    SignTxnOutputAccepted output_accepted = 4;
     SignTxnSignatureResponse signature = 5;
 
     error.CommonError common_error = 6;
