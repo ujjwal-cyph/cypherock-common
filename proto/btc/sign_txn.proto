@@ -131,7 +131,7 @@ message SignTxnOutput {
 
   bool is_change = 3;
   // output change address index that should be checked on the HW device
-  optional uint32 changes_index = 4;
+  optional uint32 change_index = 4;
 }
 
 message SignTxnVerifiedResponse {
@@ -141,7 +141,7 @@ message SignTxnSignatureRequest {
 }
 
 message SignTxnSignatureResponse {
-  bytes signature = 1;
+  bytes script_sig = 1;
 }
 
 message SignTxnRequest {
