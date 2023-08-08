@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "near/get_public_key.proto";
+
+import "error.proto";
+
+package near;
+
+message Query {
+  oneof request {
+    GetPublicKeyRequest get_public_keys = 1;
+    GetPublicKeyRequest get_public_key = 2;
+  }
+}
+
+message Result {
+  oneof response {
+    GetPublicKeyResponse get_public_keys = 1;
+    GetPublicKeyResponse get_public_key = 2;
+    
+    error.CommonError common_error = 3;
+  }
+}

@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+import "error.proto";
+
+package near;
+/**
+ * Example of successful get_public_keys generation
+ *
+ *        Host                       Device
+ * GetPublicKeyIntiateRequest  =>
+ *                            <= GetPublicKeyResultResponse (1-10 public keys)
+ * GetPublicKeyFetchNextRequest =>
+ *                            <= GetPublicKeyResultResponse (11-20 public keys)
+ * GetPublicKeyFetchNextRequest =>
+ *                            <= GetPublicKeyResultResponse (21-30 public keys)
+ */
+
+
+/**
+ * Example of successful get_public_key generation
+ *
+ *        Host                       Device
+ * GetPublicKeyIntiateRequest  =>
+ *                            <= GetPublicKeyResultResponse (1 public key to be sent after user confirmation)
+ */
+
+enum GetPublicKeyStatus {
+  GET_PUBLIC_KEY_STATUS_INIT = 0;
+  GET_PUBLIC_KEY_STATUS_CONFIRM = 1;
+  GET_PUBLIC_KEY_STATUS_SEED_GENERATED = 2;
+  GET_PUBLIC_KEY_STATUS_VERIFY = 3;
+}
+
+message GetPublicKeyDerivationPath {
+  repeated uint32 path = 1;
+}
+
+message GetPublicKeyIntiateRequest {
+  bytes wallet_id = 1;
+
+  /*
+   * address: m/44'/397'/0'/0'/i'
+   */
+  repeated GetPublicKeyDerivationPath derivation_paths = 2;
+}
+
+message GetPublicKeyFetchNextRequest {
+}
+
+message GetPublicKeyResultResponse {
+  repeated bytes public_key = 1;
+}
+
+message GetPublicKeyRequest {
+  oneof request {
+    GetPublicKeyIntiateRequest initiate = 1;
+    GetPublicKeyFetchNextRequest fetch_next = 2;
+  }
+}
+
+message GetPublicKeyResponse {
+  oneof response {
+    GetPublicKeyResultResponse result = 1;
+
+    error.CommonError common_error = 2;
+  }
+}
