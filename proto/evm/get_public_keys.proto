@@ -5,6 +5,15 @@ import "error.proto";
 import "evm/common.proto";
 
 package evm;
+/**
+ *        Host                       Device
+ * GetPublicKeysIntiateRequest  =>
+ *                            <= GetPublicKeysResultResponse (1-10 keys)
+ * GetPublicKeysFetchNextRequest =>
+ *                            <= GetPublicKeysResultResponse (11-20 keys)
+ * GetPublicKeysFetchNextRequest =>
+ *                            <= GetPublicKeysResultResponse (21-30 keys)
+ */
 
 enum GetPublicKeysStatus {
   GET_PUBLIC_KEYS_STATUS_INIT = 0;
@@ -29,9 +38,12 @@ message GetPublicKeysIntiateRequest {
 
   bool do_verify = 3;
 
-  bytes chain_id = 4;
+  uint64 chain_id = 4;
 
   AddressFormat format = 5;
+}
+
+message GetPublicKeysFetchNextRequest {
 }
 
 message GetPublicKeysResultResponse {
@@ -41,6 +53,7 @@ message GetPublicKeysResultResponse {
 message GetPublicKeysRequest {
   oneof request {
     GetPublicKeysIntiateRequest initiate = 1;
+    GetPublicKeysFetchNextRequest fetch_next = 2;
   }
 }
 
