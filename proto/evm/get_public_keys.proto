@@ -47,7 +47,7 @@ message GetPublicKeysFetchNextRequest {
 }
 
 message GetPublicKeysResultResponse {
-  repeated string public_keys = 1;
+  repeated bytes public_keys = 1;
 }
 
 message GetPublicKeysRequest {
