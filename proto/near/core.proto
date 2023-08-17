@@ -9,14 +9,14 @@ package near;
 message Query {
   oneof request {
     GetPublicKeyRequest get_public_keys = 1;
-    GetPublicKeyRequest get_public_key = 2;
+    GetPublicKeyRequest get_user_verified_public_key = 2;
   }
 }
 
 message Result {
   oneof response {
     GetPublicKeyResponse get_public_keys = 1;
-    GetPublicKeyResponse get_public_key = 2;
+    GetPublicKeyResponse get_user_verified_public_key = 2;
     
     error.CommonError common_error = 3;
   }
