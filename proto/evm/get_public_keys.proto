@@ -5,6 +5,15 @@ import "error.proto";
 import "evm/common.proto";
 
 package evm;
+/**
+ *        Host                       Device
+ * GetPublicKeysIntiateRequest  =>
+ *                            <= GetPublicKeysResultResponse (1-10 keys)
+ * GetPublicKeysFetchNextRequest =>
+ *                            <= GetPublicKeysResultResponse (11-20 keys)
+ * GetPublicKeysFetchNextRequest =>
+ *                            <= GetPublicKeysResultResponse (21-30 keys)
+ */
 
 enum GetPublicKeysStatus {
   GET_PUBLIC_KEYS_STATUS_INIT = 0;
@@ -22,25 +31,36 @@ message GetPublicKeysDerivationPath {
 message GetPublicKeysIntiateRequest {
   bytes wallet_id = 1;
 
-  /*
-   * address: m/44'/60'/0'/0/0
+  /* types of addresses
+   *
+   * legacy      : m/44'/60'/0'/x
+   * ledger live : m/44'/60'/x'/0/0
+   * metamask    : m/44'/60'/0'/0/x
+   *
    */
   repeated GetPublicKeysDerivationPath derivation_paths = 2;
 
   bool do_verify = 3;
 
-  bytes chain_id = 4;
+  /*
+   * https://github.com/ethereum/EIPs/blob/830708a049fc982fd595cb0c4dca703aebefd003/EIPS/eip-2294.md
+   */
+  uint64 chain_id = 4;
 
   AddressFormat format = 5;
 }
 
+message GetPublicKeysFetchNextRequest {
+}
+
 message GetPublicKeysResultResponse {
-  repeated string public_keys = 1;
+  repeated bytes public_keys = 1;
 }
 
 message GetPublicKeysRequest {
   oneof request {
     GetPublicKeysIntiateRequest initiate = 1;
+    GetPublicKeysFetchNextRequest fetch_next = 2;
   }
 }
 
