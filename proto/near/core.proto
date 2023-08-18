@@ -8,15 +8,15 @@ package near;
 
 message Query {
   oneof request {
-    GetPublicKeyRequest get_public_keys = 1;
-    GetPublicKeyRequest get_user_verified_public_key = 2;
+    GetPublicKeysRequest get_public_keys = 1;
+    GetPublicKeysRequest get_user_verified_public_key = 2;
   }
 }
 
 message Result {
   oneof response {
-    GetPublicKeyResponse get_public_keys = 1;
-    GetPublicKeyResponse get_user_verified_public_key = 2;
+    GetPublicKeysResponse get_public_keys = 1;
+    GetPublicKeysResponse get_user_verified_public_key = 2;
     
     error.CommonError common_error = 3;
   }
