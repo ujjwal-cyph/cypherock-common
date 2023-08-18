@@ -34,7 +34,7 @@ enum GetPublicKeysStatus {
 }
 
 message GetPublicKeysDerivationPath {
-  // Supported path count is 2-4 bytes
+  // Supported path count is 2-4 levels
   repeated uint32 path = 1;
 }
 
