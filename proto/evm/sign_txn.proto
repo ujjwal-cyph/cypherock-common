@@ -37,11 +37,11 @@ message SignTxnInitiateRequest {
 }
 
 message SignTxnDataResponse {
-  common.ChunkResponse chunk_response = 1;
+  common.ChunkPayload chunk_payload = 1;
 }
 
 message SignTxnDataRequest {
-  common.ChunkRequest chunk_request = 1;
+  common.ChunkAck chunk_ack = 1;
 }
 
 message SignTxnSignatureResponse {
