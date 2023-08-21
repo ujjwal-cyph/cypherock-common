@@ -13,6 +13,7 @@ message Query {
     GetPublicKeysRequest get_public_keys = 1;
     SignTxnRequest sign_txn = 2;
     SignMsgRequest sign_msg = 3;
+    GetPublicKeysRequest get_user_verified_public_key = 4;
   }
 }
 
@@ -22,5 +23,6 @@ message Result {
     SignTxnResponse sign_txn = 2;
     SignMsgResponse sign_msg = 3;
     error.CommonError common_error = 4;
+    GetPublicKeysResponse get_user_verified_public_key = 5;
   }
 }
