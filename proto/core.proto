@@ -36,12 +36,6 @@ enum ErrorType {
   APP_NOT_ACTIVE = 3;
 };
 
-enum SeedGenerationStatus {
-  SEED_GENERATION_STATUS_INIT = 0;
-  SEED_GENERATION_STATUS_PASSPHRASE = 1;
-  SEED_GENERATION_STATUS_PIN_CARD = 2;
-};
-
 message ErrorCmd {
   uint32 applet_id = 1;
   ErrorType type = 2;
