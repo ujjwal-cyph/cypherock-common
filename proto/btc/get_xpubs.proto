@@ -18,9 +18,7 @@ package btc;
 enum GetXpubsStatus {
   GET_XPUBS_STATUS_INIT = 0;
   GET_XPUBS_STATUS_CONFIRM = 1;
-  GET_XPUBS_STATUS_PASSPHRASE = 2;
-  GET_XPUBS_STATUS_PIN = 3;
-  GET_XPUBS_STATUS_CARD = 4;
+  GET_XPUBS_STATUS_SEED_GENERATED = 2;
 }
 
 message GetXpubDerivationPath {

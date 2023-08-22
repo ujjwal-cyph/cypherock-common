@@ -47,7 +47,9 @@ message Status {
   bool abort_disabled = 3;
   uint32 current_cmd_seq = 4;
   CmdState cmd_state = 5;
-  // Can be an enum
+  // flow_status field can hold multiple enums of 1-byte
+  // LSB can be of type GetPublicKeyStatus
+  // LSB + 1 can be of type SeedGenerationStatus
   uint32 flow_status = 6;
 }
 
