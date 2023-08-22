@@ -6,8 +6,9 @@ package error;
  * When requesting for a specific wallet and it's not found
  */
 enum WalletNotFound {
-  WALLET_NOT_FOUND_ON_DEVICE = 0;
-  WALLET_NOT_FOUND_ON_CARD = 1;
+  WALLET_NOT_FOUND_UNKNOWN = 0;
+  WALLET_NOT_FOUND_ON_DEVICE = 1;
+  WALLET_NOT_FOUND_ON_CARD = 2;
 }
 
 /*
@@ -15,20 +16,11 @@ enum WalletNotFound {
  * state
  */
 enum WalletPartialState {
-  WALLET_PARTIAL_STATE_LOCKED = 0;
-  WALLET_PARTIAL_STATE_DELETE = 1;
-  WALLET_PARTIAL_STATE_UNVERIFIED = 2;
-  WALLET_PARTIAL_STATE_OUT_OF_SYNC = 3;
-}
-
-/*
- * When the operation requires wallet selection
- * and no wallets exists or all wallets are in partial
- * state
- */
-enum NoWalletExists {
-  NO_WALLET_EXISTS_VALID_STATE = 0;
-  NO_WALLET_EXISTS_PARTIAL_STATE = 1;
+  WALLET_PARTIAL_STATE_UNKNOWN = 0;
+  WALLET_PARTIAL_STATE_LOCKED = 1;
+  WALLET_PARTIAL_STATE_DELETE = 2;
+  WALLET_PARTIAL_STATE_UNVERIFIED = 3;
+  WALLET_PARTIAL_STATE_OUT_OF_SYNC = 4;
 }
 
 /*
@@ -120,11 +112,7 @@ message CommonError {
     // The specified wallet is in partial state
     WalletPartialState wallet_partial_state = 12;
 
-    // No wallet exist on device
-    NoWalletExists no_wallet_exists = 13;
-
     // ****** User action errors ******
-
     // Card Error
     CardError card_error = 21;
 
