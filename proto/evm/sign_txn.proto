@@ -37,8 +37,8 @@ message SignTxnInitiateRequest {
   repeated uint32 derivationPath = 2;
   uint64 chain_id = 3;
   AddressFormat address_format = 4;
+  uint32 transaction_size = 5;
   // TODO: need to show token symbol for token transactions
-  // TODO: need to know the transaction size
 }
 
 message SignTxnConfirmationResponse {
