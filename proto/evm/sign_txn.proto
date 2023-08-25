@@ -13,13 +13,16 @@ package evm;
  *        Host                       Device
  *
  * SignTxnInitiateRequest  => 
- *                         <= SignTxnDataRequest
- * SignTxnDataResponse   =>
- *                         <= SignTxnDataRequest
- * SignTxnDataResponse   =>
+ *                         <= SignTxnConfirmationResponse
+ * SignTxnData             =>
+ *                         <= SignTxnDataAccepted
+ *                        ....
+ * SignTxnData             =>
+ *                         <= SignTxnDataAccepted
  *
  * **** Device has all transaction information ****
  *
+ * SignTxnSignatureRequest =>
  *                         <= SignTxnSignatureResponse
  */
 enum SignTxnStatus {
@@ -32,16 +35,21 @@ enum SignTxnStatus {
 message SignTxnInitiateRequest {
   bytes walletId = 1;
   repeated uint32 derivationPath = 2;
-  bytes chain_id = 3;
+  uint64 chain_id = 3;
   AddressFormat address_format = 4;
+  uint32 transaction_size = 5;
+  // TODO: need to show token symbol for token transactions
 }
 
-message SignTxnDataResponse {
-  common.ChunkResponse chunk_response = 1;
+message SignTxnConfirmationResponse {
 }
 
-message SignTxnDataRequest {
-  common.ChunkRequest chunk_request = 1;
+message SignTxnData {
+  common.ChunkPayload chunk_payload = 1;
+}
+
+message SignTxnDataAccepted {
+  common.ChunkAck chunk_ack = 1;
 }
 
 message SignTxnSignatureResponse {
@@ -50,18 +58,23 @@ message SignTxnSignatureResponse {
   bytes v = 3;
 }
 
+message SignTxnSignatureRequest {
+}
+
 message SignTxnRequest {
   oneof request {
     SignTxnInitiateRequest initiate = 1;
-    SignTxnDataResponse txn_data = 2;
+    SignTxnData txn_data = 2;
+    SignTxnSignatureRequest signature = 3;
   }
 }
 
 message SignTxnResponse {
   oneof response {
-    SignTxnDataRequest txn_data = 1;
-    SignTxnSignatureResponse signature = 2;
+    SignTxnConfirmationResponse confirmation = 1;
+    SignTxnDataAccepted data_accepted = 2;
+    SignTxnSignatureResponse signature = 3;
 
-    error.CommonError common_error = 3;
+    error.CommonError common_error = 4;
   }
 }

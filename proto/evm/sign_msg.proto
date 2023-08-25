@@ -76,11 +76,11 @@ message SignMsgInitiateRequest {
 }
 
 message SignMsgDataResponse {
-  common.ChunkResponse chunk_response = 1;
+  common.ChunkPayload chunk_payload = 1;
 }
 
 message SignMsgDataRequest {
-  common.ChunkRequest chunk_request = 1;
+  common.ChunkAck chunk_ack = 1;
 }
 
 message SignMsgRequest {
