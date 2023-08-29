@@ -12,7 +12,7 @@ package evm;
  *
  *        Host                       Device
  *
- * SignTxnInitiateRequest  => 
+ * SignTxnInitiateRequest  =>
  *                         <= SignTxnConfirmationResponse
  * SignTxnData             =>
  *                         <= SignTxnDataAccepted
@@ -38,7 +38,17 @@ message SignTxnInitiateRequest {
   uint64 chain_id = 3;
   AddressFormat address_format = 4;
   uint32 transaction_size = 5;
-  // TODO: need to show token symbol for token transactions
+  // TODO: remove the member. [obsolete] significance:
+  // types of transaction -
+  // 1. ETH transfer, NA
+  // 2. whitelisted token transfer, for verification & for prompt
+  // 3. non-whitelisted token transfer (clear signing), for prompt
+  // 4. unknown data transactions (blind signing), NA
+  // 5. Method other than token transfer (clear signing) **
+  string token_symbol = 6;
+  // TODO: remove the member. [obsolete] signifies if the token transfer
+  // is triggered from cysync or 3rd party via wallet connect
+  bool is_token_transfer = 7;
 }
 
 message SignTxnConfirmationResponse {
