@@ -11,10 +11,12 @@ package evm;
  *        Host                       Device
  *
  * SignMsgInitiateRequest  => 
- *                         <= SignMsgDataRequest
- * SignMsgDataResponse   =>
- *                         <= SignMsgDataRequest
- * SignMsgDataResponse   =>
+ *                         <= SignMsgConfirmationResponse
+ * SignMsgData             =>
+ *                         <= SignMsgDataAccepted
+ *                        ....
+ * SignMsgData             =>
+ *                         <= SignMsgDataAccepted
  *
  * ******** Device has all transaction information ********
  *      
@@ -25,7 +27,7 @@ package evm;
  *      `SignTypedDataStruct` to decode the value.
  *      
  * ********************************************************
- *
+ * SignMsgSignatureRequest =>
  *                         <= SignMsgSignatureResponse
  */
 enum SignMsgStatus {
@@ -72,22 +74,22 @@ message SignTypedDataStruct {
 message SignMsgInitiateRequest {
   bytes walletId = 1;
   repeated uint32 derivationPath = 2;
-  SignMsgType messageType = 3; 
+  SignMsgType messageType = 3;
+  uint32 total_msg_size = 4;
 }
 
-message SignMsgDataResponse {
+message SignMsgConfirmationResponse {
+}
+
+message SignMsgData {
   common.ChunkPayload chunk_payload = 1;
 }
 
-message SignMsgDataRequest {
+message SignMsgDataAccepted {
   common.ChunkAck chunk_ack = 1;
 }
 
-message SignMsgRequest {
-  oneof request {
-    SignMsgInitiateRequest initiate = 1;
-    SignMsgDataResponse msg_data = 2;
-  }
+message SignMsgSignatureRequest {
 }
 
 message SignMsgSignatureResponse {
@@ -96,11 +98,20 @@ message SignMsgSignatureResponse {
   bytes v = 3;
 }
 
+message SignMsgRequest {
+  oneof request {
+    SignMsgInitiateRequest initiate = 1;
+    SignMsgData msg_data = 2;
+    SignMsgSignatureRequest signature = 3;
+  }
+}
+
 message SignMsgResponse {
   oneof response {
-    SignMsgDataRequest msg_data = 1;
-    SignMsgSignatureResponse signature = 2;
+    SignMsgConfirmationResponse confirmation = 1;
+    SignMsgDataAccepted data_accepted = 2;
+    SignMsgSignatureResponse signature = 3;
 
-    error.CommonError common_error = 3;
+    error.CommonError common_error = 4;
   }
 }
