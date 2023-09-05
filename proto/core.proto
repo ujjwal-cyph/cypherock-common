@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "version.proto";
+
 package core;
 
 enum DeviceWaitingOn {
@@ -63,5 +65,6 @@ message Msg {
   oneof type {
     Command cmd = 1;
     ErrorCmd error = 2;
+    AppVersionCmd app_version = 3;
   }
 }

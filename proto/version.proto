@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+import "common.proto";
+
+package core;
+
+message AppVersionItem {
+  uint32 id = 1;
+  common.Version version = 2;
+}
+
+message AppVersionIntiateRequest {
+}
+
+message AppVersionResultResponse {
+  repeated AppVersionItem app_versions = 1;
+}
+
+message AppVersionRequest {
+  oneof request {
+    AppVersionIntiateRequest initiate = 1;
+  }
+}
+
+message AppVersionResponse {
+  oneof response {
+    AppVersionResultResponse result = 1;
+
+    error.CommonError common_error = 2;
+  }
+}
+
+message AppVersionCmd {
+  oneof {
+    AppVersionRequest request;
+    AppVersionResponse response;
+  }
+}
