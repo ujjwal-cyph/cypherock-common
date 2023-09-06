@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "common.proto";
+import "error.proto";
 
 package core;
 
@@ -31,8 +32,8 @@ message AppVersionResponse {
 }
 
 message AppVersionCmd {
-  oneof {
-    AppVersionRequest request;
-    AppVersionResponse response;
+  oneof cmd {
+    AppVersionRequest request = 1;
+    AppVersionResponse response = 2;
   }
 }
