@@ -38,6 +38,7 @@ message GetPublicKeysIntiateRequest {
    */
   repeated GetPublicKeysDerivationPath derivation_paths = 2;
 
+  bool do_verify = 3;
 
   /*
    * https://github.com/ethereum/EIPs/blob/830708a049fc982fd595cb0c4dca703aebefd003/EIPS/eip-2294.md
