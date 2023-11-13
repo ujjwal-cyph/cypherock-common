@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package mpc_poc;
+
+message EntityInfo {
+  uint32 timestamp = 1; // can also use google.protobuf.Timestamp
+  bytes random_nonce = 2;
+  uint32 threshold = 3; // uint8 doesn't exist in proto3
+  uint32 total_participants = 4; // uint8 doesn't exist in proto3
+  bytes device_id = 5;
+  bytes pub_key = 6;
+  bytes wallet_id = 7;
+}

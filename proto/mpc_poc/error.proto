@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package mpc_poc;
+
+enum SignEntityInfoError {
+  SIGN_ENTITY_INFO_ERROR_INVALID_FINGERPRINT = 0;
+  SIGN_ENTITY_INFO_ERROR_USER_CONFIRMATION_FAILED = 1;
+  SIGN_ENTITY_INFO_ERROR_CHECKS_FAILED = 2;
+  SIGN_ENTITY_INFO_ERROR_OTHER_ERROR = 3;
+}
+
+enum VerifyEntityInfoError {
+  VERIFY_ENTITY_INFO_ERROR_INVALID_FINGERPRINT = 0;
+  VERIFY_ENTITY_INFO_ERROR_INVALID_SIGNATURE = 1;
+  VERIFY_ENTITY_INFO_ERROR_USER_CONFIRMATION_FAILED = 2;
+  VERIFY_ENTITY_INFO_ERROR_CHECKS_FAILED = 3;
+  VERIFY_ENTITY_INFO_ERROR_OTHER_ERROR = 4;
+}
+
+message ErrorResponse {
+  oneof response {
+    SignEntityInfoError signEntityInfoError = 1;
+    VerifyEntityInfoError verifyEntityInfoError = 2;
+  }
+}

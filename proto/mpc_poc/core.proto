@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package mpc_poc;
+
+import "mpc_poc/get_random_nonce.proto";
+import "mpc_poc/verify_entity_info.proto";
+import "mpc_poc/sign_entity_info.proto";
+
+import "error.proto";
+
+message Query {
+  oneof request {
+    GetRandomNonceRequest get_random_nonce = 1;
+    VerifyEntityInfoRequest verify_entity_info = 2;
+    SignEntityInfoRequest sign_entity_info = 3;
+  }
+}
+
+message Result {
+  oneof response {
+    GetRandomNonceResponse get_random_nonce = 1;
+    VerifyEntityInfoResponse verify_entity_info = 2;
+    SignEntityInfoResponse sign_message = 3;
+
+    error.CommonError common_error = 4;
+  }
+}

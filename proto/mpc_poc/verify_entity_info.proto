@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package mpc_poc;
+
+import "mpc_poc/entity_info.proto";
+import "error.proto";
+
+message VerifyEntityInfoInitiateRequest {
+  bytes fingerprint = 1;
+  EntityInfo entity_info = 2;
+  bytes signature = 3;
+}
+
+message VerifyEntityInfoRequest {
+  oneof request {
+      VerifyEntityInfoInitiateRequest initiate = 1;
+  }
+}
+
+message VerifyEntityInfoResultResponse {
+  bool verified = 1;
+}
+
+message VerifyEntityInfoResponse {
+  oneof response {
+      VerifyEntityInfoResultResponse result = 1;
+      error.CommonError common_error = 2;
+  }
+}

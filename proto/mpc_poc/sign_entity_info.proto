@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package mpc_poc;
+
+import "mpc_poc/entity_info.proto";
+import "error.proto";
+
+message SignEntityInfoInitiateRequest {
+  bytes fingerprint = 1;
+  EntityInfo entity_info = 2;
+}
+
+message SignEntityInfoRequest {
+    oneof request {
+        SignEntityInfoInitiateRequest initiate = 1;
+    }
+}
+
+message SignEntityInfoResultResponse {
+  bytes signature = 1; // 256-bit signature
+}
+
+message SignEntityInfoResponse {
+    oneof response {
+        SignEntityInfoResultResponse result = 1;
+        error.CommonError common_error = 2;
+    }
+}
