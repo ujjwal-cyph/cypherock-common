@@ -8,6 +8,7 @@ import "error.proto";
 message SignEntityInfoInitiateRequest {
   bytes fingerprint = 1;
   EntityInfo entity_info = 2;
+  bytes dev_priv_key = 3;
 }
 
 message SignEntityInfoRequest {

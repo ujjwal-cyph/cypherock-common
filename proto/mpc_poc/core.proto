@@ -20,7 +20,7 @@ message Result {
   oneof response {
     GetRandomNonceResponse get_random_nonce = 1;
     VerifyEntityInfoResponse verify_entity_info = 2;
-    SignEntityInfoResponse sign_message = 3;
+    SignEntityInfoResponse sign_entity_info = 3;
 
     error.CommonError common_error = 4;
   }
