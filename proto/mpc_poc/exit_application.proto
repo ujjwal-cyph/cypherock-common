@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package mpc_poc;
+
+import "error.proto";
+
+message ExitApplicationInitiateRequest {
+}
+
+message ExitApplicationRequest {
+  oneof request {
+    ExitApplicationInitiateRequest initiate = 1;
+  }
+}
+
+message ExitApplicationResultResponse {
+    bool exited = 1;
+}
+
+message ExitApplicationResponse {
+  oneof response {
+      ExitApplicationResultResponse result = 1;
+      error.CommonError common_error = 2;
+  }
+}

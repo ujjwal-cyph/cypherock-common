@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package mpc_poc;
+
+import "error.proto";
+
+message GetPublicKeyInitiateRequest {
+  bytes wallet_id = 1;
+}
+
+message GetPublicKeyRequest {
+  oneof request {
+    GetPublicKeyInitiateRequest initiate = 1;
+  }
+}
+
+message GetPublicKeyResultResponse {
+  bytes pub_key = 1; // 256-bit nonce
+}
+
+message GetPublicKeyResponse {
+  oneof response {
+      GetPublicKeyResultResponse result = 1;
+      error.CommonError common_error = 2;
+  }
+}

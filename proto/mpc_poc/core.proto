@@ -5,23 +5,32 @@ package mpc_poc;
 import "mpc_poc/get_random_nonce.proto";
 import "mpc_poc/verify_entity_info.proto";
 import "mpc_poc/sign_entity_info.proto";
+import "mpc_poc/init_application.proto";
+import "mpc_poc/exit_application.proto";
+import "mpc_poc/get_public_key.proto";
 
 import "error.proto";
 
 message Query {
   oneof request {
-    GetRandomNonceRequest get_random_nonce = 1;
-    VerifyEntityInfoRequest verify_entity_info = 2;
-    SignEntityInfoRequest sign_entity_info = 3;
+    InitApplicationRequest init_application = 1;
+    GetRandomNonceRequest get_random_nonce = 2;
+    VerifyEntityInfoRequest verify_entity_info = 3;
+    SignEntityInfoRequest sign_entity_info = 4;
+    ExitApplicationRequest exit_application = 5;
+    GetPublicKeyRequest get_public_key = 6;
   }
 }
 
 message Result {
   oneof response {
-    GetRandomNonceResponse get_random_nonce = 1;
-    VerifyEntityInfoResponse verify_entity_info = 2;
-    SignEntityInfoResponse sign_entity_info = 3;
+    InitApplicationResponse init_application = 1;
+    GetRandomNonceResponse get_random_nonce = 2;
+    VerifyEntityInfoResponse verify_entity_info = 3;
+    SignEntityInfoResponse sign_entity_info = 4;
+    ExitApplicationResponse exit_application = 5;
+    GetPublicKeyResponse get_public_key = 6;
 
-    error.CommonError common_error = 4;
+    error.CommonError common_error = 7;
   }
 }
