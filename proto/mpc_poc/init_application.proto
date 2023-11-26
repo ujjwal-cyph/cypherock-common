@@ -15,7 +15,6 @@ message InitApplicationRequest {
 }
 
 message InitApplicationResultResponse {
-  bool initiated = 1;
   bytes pub_key = 2;
 }
 
