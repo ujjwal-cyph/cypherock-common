@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package mpc_poc;
+
+import "error.proto";
+
+message DummyInitiateRequest {
+}
+
+message DummyNextRequest {
+}
+
+message DummyRequest {
+  oneof request {
+    DummyInitiateRequest initiate = 1;
+    DummyNextRequest next = 2;
+  }
+}
+
+message DummyFirstResponse {
+    uint32 num = 1; 
+}
+
+message DummySecondResponse {
+    bool condition = 1; 
+}
+
+message DummyResponse {
+  oneof response {
+      DummyFirstResponse first_response = 1;
+      DummySecondResponse second_response = 2;
+      
+      error.CommonError common_error = 3;
+  }
+}

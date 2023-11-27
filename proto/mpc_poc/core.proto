@@ -8,6 +8,7 @@ import "mpc_poc/sign_entity_info.proto";
 import "mpc_poc/init_application.proto";
 import "mpc_poc/exit_application.proto";
 import "mpc_poc/get_public_key.proto";
+import "mpc_poc/dummy.proto";
 
 import "error.proto";
 
@@ -19,6 +20,7 @@ message Query {
     SignEntityInfoRequest sign_entity_info = 4;
     ExitApplicationRequest exit_application = 5;
     GetPublicKeyRequest get_public_key = 6;
+    DummyRequest dummy = 7;
   }
 }
 
@@ -30,7 +32,8 @@ message Result {
     SignEntityInfoResponse sign_entity_info = 4;
     ExitApplicationResponse exit_application = 5;
     GetPublicKeyResponse get_public_key = 6;
+    DummyResponse dummy = 7;
 
-    error.CommonError common_error = 7;
+    error.CommonError common_error = 8;
   }
 }
