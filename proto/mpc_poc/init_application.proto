@@ -2,25 +2,10 @@ syntax = "proto3";
 
 package mpc_poc;
 
-import "error.proto";
-
-message InitApplicationInitiateRequest {
+message InitApplicationRequest {
   bytes wallet_id = 1;  
 }
 
-message InitApplicationRequest {
-  oneof request {
-    InitApplicationInitiateRequest initiate = 1;
-  }
-}
-
-message InitApplicationResultResponse {
-  bytes pub_key = 2;
-}
-
 message InitApplicationResponse {
-  oneof response {
-      InitApplicationResultResponse result = 1;
-      error.CommonError common_error = 2;
-  }
+  bytes pub_key = 2;
 }

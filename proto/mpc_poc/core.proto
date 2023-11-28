@@ -6,9 +6,9 @@ import "mpc_poc/get_random_nonce.proto";
 import "mpc_poc/verify_entity_info.proto";
 import "mpc_poc/sign_entity_info.proto";
 import "mpc_poc/init_application.proto";
-import "mpc_poc/exit_application.proto";
 import "mpc_poc/get_public_key.proto";
 import "mpc_poc/dummy.proto";
+import "mpc_poc/group_setup.proto";
 
 import "error.proto";
 
@@ -18,9 +18,9 @@ message Query {
     GetRandomNonceRequest get_random_nonce = 2;
     VerifyEntityInfoRequest verify_entity_info = 3;
     SignEntityInfoRequest sign_entity_info = 4;
-    ExitApplicationRequest exit_application = 5;
-    GetPublicKeyRequest get_public_key = 6;
-    DummyRequest dummy = 7;
+    GetPublicKeyRequest get_public_key = 5;
+    DummyRequest dummy = 6;
+    GroupSetupRequest group_setup = 7;
   }
 }
 
@@ -30,9 +30,9 @@ message Result {
     GetRandomNonceResponse get_random_nonce = 2;
     VerifyEntityInfoResponse verify_entity_info = 3;
     SignEntityInfoResponse sign_entity_info = 4;
-    ExitApplicationResponse exit_application = 5;
-    GetPublicKeyResponse get_public_key = 6;
-    DummyResponse dummy = 7;
+    GetPublicKeyResponse get_public_key = 5;
+    DummyResponse dummy = 6;
+    GroupSetupResponse group_setup = 7;
 
     error.CommonError common_error = 8;
   }

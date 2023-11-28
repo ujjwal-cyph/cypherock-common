@@ -5,9 +5,24 @@ package mpc_poc;
 message EntityInfo {
   uint32 timestamp = 1; // can also use google.protobuf.Timestamp
   bytes random_nonce = 2;
-  uint32 threshold = 3; // uint8 doesn't exist in proto3
-  uint32 total_participants = 4; // uint8 doesn't exist in proto3
-  bytes device_id = 5;
-  bytes pub_key = 6;
-  bytes wallet_id = 7;
+  uint32 threshold = 3; 
+  uint32 total_participants = 4; 
+  ParticipantDeviceInfo device_info = 5;
+}
+
+message ParticipantDeviceInfo {
+  bytes device_id = 1;
+  bytes pub_key = 2;
+  bytes wallet_id = 3;
+}
+
+message ParticipantInfo {
+  bytes fingerprint = 1;
+  EntityInfo entity_info = 2;
+}
+
+message GroupInfo {
+  uint32 threshold = 1;
+  uint32 total_participants = 2;
+  repeated ParticipantInfo participants = 3;  
 }

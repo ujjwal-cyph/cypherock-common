@@ -15,7 +15,7 @@ message GetPublicKeyRequest {
 }
 
 message GetPublicKeyResultResponse {
-  bytes pub_key = 1; // 256-bit nonce
+  bytes pub_key = 1; 
 }
 
 message GetPublicKeyResponse {

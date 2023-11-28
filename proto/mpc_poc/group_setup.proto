@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package mpc_poc;
+
+import "error.proto";
+import "mpc_poc/init_application.proto";
+import "mpc_poc/entity_info.proto";
+
+message GroupSetupGetEntityInfoRequest {
+  uint32 timestamp = 1;
+  uint32 threshold = 2;
+  uint32 total_participants = 3;
+}
+
+message GroupSetupGetEntityInfoResponse {
+    EntityInfo entity_info = 1;
+}
+
+message GroupSetupVerifyParticipantInfoListRequest {
+    repeated ParticipantInfo participant_info_list = 1;
+    uint32 length = 2;
+}
+
+message GroupSetupVerifyParticipantInfoListResponse {
+    bool verified = 1;
+}
+
+message GroupSetupGetGroupIDRequest {
+}
+
+message GroupSetupGetGroupIDResponse {
+    bytes group_id = 1;
+    GroupInfo group_info = 2;
+    bytes signature = 3;
+}
+
+message GroupSetupRequest {
+  oneof request {
+    InitApplicationRequest initiate = 1;
+    GroupSetupGetEntityInfoRequest get_entity_info = 2;
+    GroupSetupVerifyParticipantInfoListRequest verify_participant_info_list = 3;
+    GroupSetupGetGroupIDRequest get_group_id = 4;
+  }
+}
+
+message GroupSetupResponse {
+  oneof response {
+      InitApplicationResponse initiate = 1;
+      GroupSetupGetEntityInfoResponse get_entity_info = 2;
+      GroupSetupVerifyParticipantInfoListResponse verify_participant_info_list = 3;
+      GroupSetupGetGroupIDResponse get_group_id = 4;
+
+      error.CommonError common_error = 5;
+  }
+}
