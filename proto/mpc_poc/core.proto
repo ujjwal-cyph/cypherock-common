@@ -2,10 +2,6 @@ syntax = "proto3";
 
 package mpc_poc;
 
-import "mpc_poc/get_random_nonce.proto";
-import "mpc_poc/verify_entity_info.proto";
-import "mpc_poc/sign_entity_info.proto";
-import "mpc_poc/init_application.proto";
 import "mpc_poc/get_public_key.proto";
 import "mpc_poc/dummy.proto";
 import "mpc_poc/group_setup.proto";
@@ -14,26 +10,18 @@ import "error.proto";
 
 message Query {
   oneof request {
-    InitApplicationRequest init_application = 1;
-    GetRandomNonceRequest get_random_nonce = 2;
-    VerifyEntityInfoRequest verify_entity_info = 3;
-    SignEntityInfoRequest sign_entity_info = 4;
-    GetPublicKeyRequest get_public_key = 5;
-    DummyRequest dummy = 6;
-    GroupSetupRequest group_setup = 7;
+    GetPublicKeyRequest get_public_key = 1;
+    DummyRequest dummy = 2;
+    GroupSetupRequest group_setup = 3;
   }
 }
 
 message Result {
   oneof response {
-    InitApplicationResponse init_application = 1;
-    GetRandomNonceResponse get_random_nonce = 2;
-    VerifyEntityInfoResponse verify_entity_info = 3;
-    SignEntityInfoResponse sign_entity_info = 4;
-    GetPublicKeyResponse get_public_key = 5;
-    DummyResponse dummy = 6;
-    GroupSetupResponse group_setup = 7;
+    GetPublicKeyResponse get_public_key = 1;
+    DummyResponse dummy = 2;
+    GroupSetupResponse group_setup = 3;
 
-    error.CommonError common_error = 8;
+    error.CommonError common_error = 4;
   }
 }
