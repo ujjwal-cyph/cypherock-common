@@ -19,7 +19,6 @@ message GroupSetupGetEntityInfoResponse {
 // need to convert it to multi-request architecture to support large number of participants
 message GroupSetupVerifyParticipantInfoListRequest {
     repeated ParticipantInfo participant_info_list = 1;
-    uint32 length = 2;
 }
 
 message GroupSetupVerifyParticipantInfoListResponse {

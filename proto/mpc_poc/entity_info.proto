@@ -24,5 +24,5 @@ message ParticipantInfo {
 message GroupInfo {
   uint32 threshold = 1;
   uint32 total_participants = 2;
-  repeated ParticipantInfo participants = 3;  
+  repeated ParticipantDeviceInfo participants = 3;  
 }
