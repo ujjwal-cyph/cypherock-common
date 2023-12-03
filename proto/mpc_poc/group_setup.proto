@@ -39,8 +39,22 @@ message GroupSetupGetShareDataResponse {
   SignedShareData signed_share_data = 1;
 }
 
-message GroupSetupGetGroupPublicKeyRequest {
+message GroupSetupGetIndividualPublicKeyRequest {
   repeated SignedShareData share_data_list = 1;
+}
+
+message SignedPublicKey {
+  bytes pub_key = 1;
+  bytes signature = 2;
+  uint32 index = 3;
+}
+
+message GroupSetupGetIndividualPublicKeyResponse {
+  SignedPublicKey signed_pub_key = 1;
+}
+
+message GroupSetupGetGroupPublicKeyRequest {
+  repeated SignedPublicKey signed_pub_key_list = 1;
 }
 
 message GroupSetupGetGroupPublicKeyResponse {
@@ -55,7 +69,8 @@ message GroupSetupRequest {
     GroupSetupVerifyParticipantInfoListRequest verify_participant_info_list = 3;
     GroupSetupGetGroupIDRequest get_group_id = 4;
     GroupSetupGetShareDataRequest get_share_data = 5;
-    GroupSetupGetGroupPublicKeyRequest get_group_public_key = 6;
+    GroupSetupGetIndividualPublicKeyRequest get_individual_public_key = 6;
+    GroupSetupGetGroupPublicKeyRequest get_group_public_key = 7;
   }
 }
 
@@ -66,8 +81,9 @@ message GroupSetupResponse {
       GroupSetupVerifyParticipantInfoListResponse verify_participant_info_list = 3;
       GroupSetupGetGroupIDResponse get_group_id = 4;
       GroupSetupGetShareDataResponse get_share_data = 5;
-      GroupSetupGetGroupPublicKeyResponse get_group_public_key = 6;
+      GroupSetupGetIndividualPublicKeyResponse get_individual_public_key = 6;
+      GroupSetupGetGroupPublicKeyResponse get_group_public_key = 7;
 
-      error.CommonError common_error = 7;
+      error.CommonError common_error = 8;
   }
 }
