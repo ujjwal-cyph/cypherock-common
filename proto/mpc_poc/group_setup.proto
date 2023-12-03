@@ -3,8 +3,7 @@ syntax = "proto3";
 package mpc_poc;
 
 import "error.proto";
-import "mpc_poc/init_application.proto";
-import "mpc_poc/entity_info.proto";
+import "mpc_poc/common.proto";
 
 message GroupSetupGetEntityInfoRequest {
   uint32 timestamp = 1;
@@ -33,12 +32,30 @@ message GroupSetupGetGroupIDResponse {
     bytes signature = 3;
 }
 
+message GroupSetupGetShareDataRequest {
+}
+
+message GroupSetupGetShareDataResponse {
+  SignedShareData signed_share_data = 1;
+}
+
+message GroupSetupGetGroupPublicKeyRequest {
+  repeated SignedShareData share_data_list = 1;
+}
+
+message GroupSetupGetGroupPublicKeyResponse {
+  GroupKeyInfo group_key = 1;
+  bytes signature = 2;
+}
+
 message GroupSetupRequest {
   oneof request {
     InitApplicationRequest initiate = 1;
     GroupSetupGetEntityInfoRequest get_entity_info = 2;
     GroupSetupVerifyParticipantInfoListRequest verify_participant_info_list = 3;
     GroupSetupGetGroupIDRequest get_group_id = 4;
+    GroupSetupGetShareDataRequest get_share_data = 5;
+    GroupSetupGetGroupPublicKeyRequest get_group_public_key = 6;
   }
 }
 
@@ -48,7 +65,9 @@ message GroupSetupResponse {
       GroupSetupGetEntityInfoResponse get_entity_info = 2;
       GroupSetupVerifyParticipantInfoListResponse verify_participant_info_list = 3;
       GroupSetupGetGroupIDResponse get_group_id = 4;
+      GroupSetupGetShareDataResponse get_share_data = 5;
+      GroupSetupGetGroupPublicKeyResponse get_group_public_key = 6;
 
-      error.CommonError common_error = 5;
+      error.CommonError common_error = 7;
   }
 }

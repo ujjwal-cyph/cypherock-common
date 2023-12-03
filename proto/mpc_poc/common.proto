@@ -26,3 +26,32 @@ message GroupInfo {
   uint32 total_participants = 2;
   repeated ParticipantDeviceInfo participants = 3;  
 }
+
+message InitApplicationRequest {
+  bytes wallet_id = 1;  
+}
+
+message InitApplicationResponse {
+  bytes pub_key = 2;
+}
+
+message Share {
+  bytes enc_share = 1;
+  uint32 original_length = 2;
+  uint32 index = 3;
+}
+
+message ShareData {
+  uint32 index = 1;
+  repeated Share data = 2;
+}
+
+message SignedShareData {
+  ShareData share_data = 1;
+  bytes signature = 2;
+}
+
+message GroupKeyInfo {
+  bytes group_pub_key = 1;
+  Share group_share = 2;
+}
