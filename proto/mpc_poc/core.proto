@@ -5,6 +5,7 @@ package mpc_poc;
 import "mpc_poc/get_public_key.proto";
 import "mpc_poc/dummy.proto";
 import "mpc_poc/group_setup.proto";
+import "mpc_poc/get_child_key.proto";
 
 import "error.proto";
 
@@ -13,6 +14,7 @@ message Query {
     GetPublicKeyRequest get_public_key = 1;
     DummyRequest dummy = 2;
     GroupSetupRequest group_setup = 3;
+    GetChildKeyRequest get_child_key = 4;
   }
 }
 
@@ -21,7 +23,8 @@ message Result {
     GetPublicKeyResponse get_public_key = 1;
     DummyResponse dummy = 2;
     GroupSetupResponse group_setup = 3;
+    GetChildKeyResponse get_child_key = 4;
 
-    error.CommonError common_error = 4;
+    error.CommonError common_error = 5;
   }
 }

@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package mpc_poc;
+
+import "error.proto";
+import "mpc_poc/common.proto";
+
+message GetChildPublicKeyRequest {
+    GroupKeyInfo group_key_info = 1;
+    bytes signature = 2;
+    repeated uint32 derivation_path = 3;
+}
+
+message GetChildPublicKeyResponse {
+    bytes public_key = 1;
+}
+
+message GetChildKeyRequest {
+  oneof request {
+    InitApplicationRequest initiate = 1;
+    GetChildPublicKeyRequest get_child_public_key = 2;
+  }
+}
+
+message GetChildKeyResponse {
+  oneof response {
+      InitApplicationResponse initiate = 1;
+      GetChildPublicKeyResponse get_child_public_key = 2;
+
+      error.CommonError common_error = 3;
+  }
+}
