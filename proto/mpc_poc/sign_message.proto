@@ -25,11 +25,48 @@ message PostGroupInfoResponse {
     bool success = 1;
 }
 
+message PostSequenceIndicesRequest {
+  repeated uint32 sequence_indices = 1;
+}
+
+message PostSequenceIndicesResponse {
+  bool success = 1;
+}
+
+message GetShareDataRequest {
+}
+
+message GetShareDataResponse {
+  SignedShareData signed_share_data = 1;
+  bool has_more = 2;
+}
+
+message GetQIRequest {
+  repeated SignedShareData share_data_list = 1;
+}
+
+message GetQIResponse {
+  SignedPublicKey signed_pub_key = 1;
+}
+
+message GetGroupKeyRequest {
+  repeated SignedPublicKey signed_pub_key_list = 1;
+}
+
+message GetGroupKeyResponse {
+  GroupKeyInfo group_key = 1;
+  bytes signature = 2;
+}
+
 message SignMessageRequest {
   oneof request {
     InitApplicationRequest initiate = 1;
     ApproveMessageRequest approve_message = 2;
     PostGroupInfoRequest post_group_info = 3;
+    PostSequenceIndicesRequest post_sequence_indices = 4;
+    GetShareDataRequest get_share_data = 5;
+    GetQIRequest get_QI = 6;
+    GetGroupKeyRequest get_group_key = 7;
   }
 }
 
@@ -38,7 +75,11 @@ message SignMessageResponse {
       InitApplicationResponse initiate = 1;
       ApproveMessageResponse approve_message = 2;
       PostGroupInfoResponse post_group_info = 3;
+      PostSequenceIndicesResponse post_sequence_indices = 4;
+      GetShareDataResponse get_share_data = 5;
+      GetQIResponse get_QI = 6;
+      GetGroupKeyResponse get_group_key = 7;
 
-      error.CommonError common_error = 4;
+      error.CommonError common_error = 8;
   }
 }

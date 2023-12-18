@@ -55,3 +55,9 @@ message GroupKeyInfo {
   bytes group_pub_key = 1;
   Share group_share = 2;
 }
+
+message SignedPublicKey {
+  bytes pub_key = 1;
+  bytes signature = 2;
+  uint32 index = 3;
+}

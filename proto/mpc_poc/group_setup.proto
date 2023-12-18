@@ -43,12 +43,6 @@ message GroupSetupGetIndividualPublicKeyRequest {
   repeated SignedShareData share_data_list = 1;
 }
 
-message SignedPublicKey {
-  bytes pub_key = 1;
-  bytes signature = 2;
-  uint32 index = 3;
-}
-
 message GroupSetupGetIndividualPublicKeyResponse {
   SignedPublicKey signed_pub_key = 1;
 }
