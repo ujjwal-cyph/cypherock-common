@@ -58,6 +58,36 @@ message GetGroupKeyResponse {
   bytes signature = 2;
 }
 
+message StartMTARequest {
+}
+
+message StartMTAResponse {
+  uint32 sender_times = 1;
+  uint32 receiver_times = 2;
+}
+
+message MTARcvGetPKInitiateRequest {
+}
+
+message MTARcvGetPKInitiateResponse {
+  uint32 to = 1;
+  uint32 length = 2;
+}
+
+message MTARcvGetPKRequest {
+}
+
+message MTARcvGetPKResponse {
+  bytes public_key = 1;
+}
+
+message MTARcvGetPKSigRequest {
+}
+
+message MTARcvGetPKSigResponse {
+  bytes signature = 1;
+}
+
 message SignMessageRequest {
   oneof request {
     InitApplicationRequest initiate = 1;
@@ -67,6 +97,11 @@ message SignMessageRequest {
     GetShareDataRequest get_share_data = 5;
     GetQIRequest get_QI = 6;
     GetGroupKeyRequest get_group_key = 7;
+
+    StartMTARequest start_mta = 8;
+    MTARcvGetPKInitiateRequest mta_rcv_get_pk_initiate = 9;
+    MTARcvGetPKRequest mta_rcv_get_pk = 10;
+    MTARcvGetPKSigRequest mta_rcv_get_pk_sig = 11;
   }
 }
 
@@ -80,6 +115,11 @@ message SignMessageResponse {
       GetQIResponse get_QI = 6;
       GetGroupKeyResponse get_group_key = 7;
 
-      error.CommonError common_error = 8;
+      StartMTAResponse start_mta = 8;
+      MTARcvGetPKInitiateResponse mta_rcv_get_pk_initiate = 9;
+      MTARcvGetPKResponse mta_rcv_get_pk = 10;
+      MTARcvGetPKSigResponse mta_rcv_get_pk_sig = 11;
+
+      error.CommonError common_error = 12;
   }
 }
