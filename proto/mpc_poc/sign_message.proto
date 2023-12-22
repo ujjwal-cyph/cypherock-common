@@ -160,6 +160,52 @@ message MTASndPostEncSigRequest {
 message MTASndPostEncSigResponse {
 }
 
+message MTASndGetMASCOTInitiateRequest {
+}
+
+message MTASndGetMASCOTInitiateResponse {
+  uint32 to = 1;
+  uint32 length = 2;
+}
+
+message MTASndGetMASCOTRequest {
+}
+
+message MTASndGetMASCOTResponse {
+  bytes enc_m0 = 1;
+  bytes enc_m1 = 2;
+}
+
+message MTASndGetMASCOTSigRequest {
+}
+
+message MTASndGetMASCOTSigResponse {
+  bytes signature = 1;
+}
+
+message MTARcvPostMASCOTInitiateRequest {
+}
+
+message MTARcvPostMASCOTInitiateResponse {
+  uint32 to = 1;
+  uint32 length = 2;
+}
+
+message MTARcvPostMASCOTRequest {
+  bytes enc_m0 = 1;
+  bytes enc_m1 = 2;
+}
+
+message MTARcvPostMASCOTResponse {
+}
+
+message MTARcvPostMASCOTSigRequest {
+  bytes signature = 1;
+}
+
+message MTARcvPostMASCOTSigResponse {
+}
+
 message SignMessageRequest {
   oneof request {
     InitApplicationRequest initiate = 1;
@@ -186,6 +232,14 @@ message SignMessageRequest {
     MTASndPostEncInitiateRequest mta_snd_post_enc_initiate = 18;
     MTASndPostEncRequest mta_snd_post_enc = 19;
     MTASndPostEncSigRequest mta_snd_post_enc_sig = 20;
+
+    MTASndGetMASCOTInitiateRequest mta_snd_get_mascot_initiate = 21;
+    MTASndGetMASCOTRequest mta_snd_get_mascot = 22;
+    MTASndGetMASCOTSigRequest mta_snd_get_mascot_sig = 23;
+
+    MTARcvPostMASCOTInitiateRequest mta_rcv_post_mascot_initiate = 24;
+    MTARcvPostMASCOTRequest mta_rcv_post_mascot = 25;
+    MTARcvPostMASCOTSigRequest mta_rcv_post_mascot_sig = 26;
   }
 }
 
@@ -216,6 +270,14 @@ message SignMessageResponse {
       MTASndPostEncResponse mta_snd_post_enc = 19;
       MTASndPostEncSigResponse mta_snd_post_enc_sig = 20;
 
-      error.CommonError common_error = 21;
+      MTASndGetMASCOTInitiateResponse mta_snd_get_mascot_initiate = 21;
+      MTASndGetMASCOTResponse mta_snd_get_mascot = 22;
+      MTASndGetMASCOTSigResponse mta_snd_get_mascot_sig = 23;
+
+      MTARcvPostMASCOTInitiateResponse mta_rcv_post_mascot_initiate = 24;
+      MTARcvPostMASCOTResponse mta_rcv_post_mascot = 25;
+      MTARcvPostMASCOTSigResponse mta_rcv_post_mascot_sig = 26;
+
+      error.CommonError common_error = 27;
   }
 }
