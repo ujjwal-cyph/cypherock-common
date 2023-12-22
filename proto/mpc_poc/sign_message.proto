@@ -137,6 +137,29 @@ message MTARcvGetEncSigResponse {
   bytes signature = 1;
 }
 
+message MTASndPostEncInitiateRequest {
+}
+
+message MTASndPostEncInitiateResponse {
+  uint32 to = 1;
+  uint32 length = 2;
+}
+
+message MTASndPostEncRequest {
+  bytes enc_m0 = 1;
+  bytes enc_m1 = 2;
+}
+
+message MTASndPostEncResponse {
+}
+
+message MTASndPostEncSigRequest {
+  bytes signature = 1;
+}
+
+message MTASndPostEncSigResponse {
+}
+
 message SignMessageRequest {
   oneof request {
     InitApplicationRequest initiate = 1;
@@ -159,6 +182,10 @@ message SignMessageRequest {
     MTARcvGetEncInitiateRequest mta_rcv_get_enc_initiate = 15;
     MTARcvGetEncRequest mta_rcv_get_enc = 16;
     MTARcvGetEncSigRequest mta_rcv_get_enc_sig = 17;
+
+    MTASndPostEncInitiateRequest mta_snd_post_enc_initiate = 18;
+    MTASndPostEncRequest mta_snd_post_enc = 19;
+    MTASndPostEncSigRequest mta_snd_post_enc_sig = 20;
   }
 }
 
@@ -185,6 +212,10 @@ message SignMessageResponse {
       MTARcvGetEncResponse mta_rcv_get_enc = 16;
       MTARcvGetEncSigResponse mta_rcv_get_enc_sig = 17;
 
-      error.CommonError common_error = 18;
+      MTASndPostEncInitiateResponse mta_snd_post_enc_initiate = 18;
+      MTASndPostEncResponse mta_snd_post_enc = 19;
+      MTASndPostEncSigResponse mta_snd_post_enc_sig = 20;
+
+      error.CommonError common_error = 21;
   }
 }
