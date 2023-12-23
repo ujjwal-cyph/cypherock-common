@@ -220,6 +220,25 @@ message SigComputeAuthenticatorRequest {
 message SigComputeAuthenticatorResponse {
 }
 
+message SigGetKAShareRequest {
+}
+
+message SignedKAShare {
+  bytes ka_share = 1;
+  bytes signature = 2;
+}
+
+message SigGetKAShareResponse {
+  SignedKAShare signed_ka_share = 1;
+}
+
+message SigComputeKARequest {
+  repeated SignedKAShare signed_ka_share_list = 1;
+}
+
+message SigComputeKAResponse {
+}
+
 message GetSigShareRequest {
 }
 
@@ -278,8 +297,11 @@ message SignMessageRequest {
     SigGetAuthenticatorRequest sig_get_authenticator = 27;
     SigComputeAuthenticatorRequest sig_compute_authenticator = 28;
 
-    GetSigShareRequest get_sig_share = 29;
-    ComputeSigRequest compute_sig = 30;
+    SigGetKAShareRequest sig_get_ka_share = 29;
+    SigComputeKARequest sig_compute_ka = 30;
+
+    GetSigShareRequest get_sig_share = 31;
+    ComputeSigRequest compute_sig = 32;
   }
 }
 
@@ -321,9 +343,12 @@ message SignMessageResponse {
       SigGetAuthenticatorResponse sig_get_authenticator = 27;
       SigComputeAuthenticatorResponse sig_compute_authenticator = 28;
 
-      GetSigShareResponse get_sig_share = 29;
-      ComputeSigResponse compute_sig = 30;
+      SigGetKAShareResponse sig_get_ka_share = 29;
+      SigComputeKAResponse sig_compute_ka = 30;
 
-      error.CommonError common_error = 31;
+      GetSigShareResponse get_sig_share = 31;
+      ComputeSigResponse compute_sig = 32;
+
+      error.CommonError common_error = 33;
   }
 }
