@@ -61,3 +61,13 @@ message SignedPublicKey {
   bytes signature = 2;
   uint32 index = 3;
 }
+
+message AuthenticatorData {
+  bytes big_w_share = 1;
+  bytes small_w_share = 2;
+}
+
+message SignedAuthenticatorData {
+  AuthenticatorData authenticator_data = 1;
+  bytes signature = 2;
+}

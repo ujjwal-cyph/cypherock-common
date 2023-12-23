@@ -206,6 +206,40 @@ message MTARcvPostMASCOTSigRequest {
 message MTARcvPostMASCOTSigResponse {
 }
 
+message SigGetAuthenticatorRequest {
+}
+
+message SigGetAuthenticatorResponse {
+  SignedAuthenticatorData signed_authenticator_data = 1;
+}
+
+message SigComputeAuthenticatorRequest {
+  repeated SignedAuthenticatorData signed_authenticator_data_list = 1;
+}
+
+message SigComputeAuthenticatorResponse {
+}
+
+message GetSigShareRequest {
+}
+
+message SignedSigShare {
+  bytes sig_share = 1;
+  bytes signature = 2;
+}
+
+message GetSigShareResponse {
+  SignedSigShare signed_sig_share = 1;
+}
+
+message ComputeSigRequest {
+  repeated SignedSigShare signed_sig_share_list = 1;
+}
+
+message ComputeSigResponse {
+  bytes signature = 1;
+}
+
 message SignMessageRequest {
   oneof request {
     InitApplicationRequest initiate = 1;
@@ -240,6 +274,12 @@ message SignMessageRequest {
     MTARcvPostMASCOTInitiateRequest mta_rcv_post_mascot_initiate = 24;
     MTARcvPostMASCOTRequest mta_rcv_post_mascot = 25;
     MTARcvPostMASCOTSigRequest mta_rcv_post_mascot_sig = 26;
+
+    SigGetAuthenticatorRequest sig_get_authenticator = 27;
+    SigComputeAuthenticatorRequest sig_compute_authenticator = 28;
+
+    GetSigShareRequest get_sig_share = 29;
+    ComputeSigRequest compute_sig = 30;
   }
 }
 
@@ -278,6 +318,12 @@ message SignMessageResponse {
       MTARcvPostMASCOTResponse mta_rcv_post_mascot = 25;
       MTARcvPostMASCOTSigResponse mta_rcv_post_mascot_sig = 26;
 
-      error.CommonError common_error = 27;
+      SigGetAuthenticatorResponse sig_get_authenticator = 27;
+      SigComputeAuthenticatorResponse sig_compute_authenticator = 28;
+
+      GetSigShareResponse get_sig_share = 29;
+      ComputeSigResponse compute_sig = 30;
+
+      error.CommonError common_error = 31;
   }
 }
