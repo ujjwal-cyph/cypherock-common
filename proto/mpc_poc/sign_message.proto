@@ -30,7 +30,7 @@ message PostSequenceIndicesRequest {
 }
 
 message PostSequenceIndicesResponse {
-  bool success = 1;
+  uint32 my_index = 1;
 }
 
 message GetShareDataRequest {
